@@ -21,7 +21,8 @@ class ToDoListFragment : Fragment() {
             Task("Buy groceries", "Be sure to get milk", "02/04"))
 
         binding.addButton.setOnClickListener {
-            rootView.findNavController().navigate(R.id.action_toDoListFragment_to_addFragment)
+            val action = ToDoListFragmentDirections.actionToDoListFragmentToAddFragment()
+            rootView.findNavController().navigate(action)
         }
 
         val myAdapter = TaskAdapter(tasks)
