@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/philipsn24/AndroidStudioProjects/TamagotchiToDo/app/src/main/res/layout/activity_main.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/philipsn24/AndroidStudioProjects/TamagotchiToDo/app/src/main/res/layout/fragment_add.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/philipsn24/AndroidStudioProjects/TamagotchiToDo/app/src/main/res/layout/fragment_to_do_list.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/philipsn24/AndroidStudioProjects/TamagotchiToDo/app/src/main/res/layout/list_item_layout.xml" value="0.271875" />
       </map>
