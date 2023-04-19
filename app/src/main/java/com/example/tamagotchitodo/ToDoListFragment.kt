@@ -15,6 +15,12 @@ class ToDoListFragment : Fragment() {
         savedInstanceState: Bundle?): View? {
         _binding = FragmentToDoListBinding.inflate(inflater, container, false)
         val rootView = binding.root
+
+        val tasks = listOf(Task("Clean bedroom", "I need to clean my room", "02/03"),
+            Task("Buy groceries", "Be sure to get milk", "02/04"))
+        val myAdapter = TaskAdapter(tasks)
+        binding.recyclerView.adapter = myAdapter
+
         return rootView
     }
 }

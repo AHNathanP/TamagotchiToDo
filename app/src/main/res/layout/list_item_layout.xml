@@ -7,34 +7,54 @@
     android:padding="8dp">
 
     <TextView
-        android:id="@+id/textViewCourseTitle"
+        android:id="@+id/taskName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="8dp"
-        tools:text="Pretend Course Title"
+        tools:text="Task Name"
+        android:textStyle="bold"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewCourseInstructor"
+        android:id="@+id/taskDueDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        tools:text="Pretend Course Instructor"
+        android:text="@string/task_due_by"
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewCourseTitle" />
+        app:layout_constraintTop_toBottomOf="@id/taskName" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id = "@+id/taskDueDate_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        tools:text="01/01"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@id/taskDueDate"
+        app:layout_constraintTop_toBottomOf="@id/taskName" />
+
+    <TextView
+        android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="16dp"
         android:background="#000000"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewCourseInstructor" />
+        app:layout_constraintTop_toBottomOf="@id/taskDueDate" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/line"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
