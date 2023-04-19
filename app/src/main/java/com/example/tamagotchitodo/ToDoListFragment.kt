@@ -22,8 +22,7 @@ class ToDoListFragment : Fragment() {
         tasks.add(Task("Do homework", "Also study for test", "02/03"))
 
         binding.addButton.setOnClickListener {
-            val action = ToDoListFragmentDirections.actionToDoListFragmentToAddFragment()
-            rootView.findNavController().navigate(action)
+            rootView.findNavController().navigate(R.id.action_toDoListFragment_to_addFragment)
         }
 
         val myAdapter = TaskAdapter(tasks)
