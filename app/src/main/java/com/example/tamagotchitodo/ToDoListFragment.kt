@@ -19,6 +19,7 @@ class ToDoListFragment : Fragment() {
 
         val tasks = mutableListOf(Task("Clean bedroom", "I need to clean my room", "02/03"),
             Task("Buy groceries", "Be sure to get milk", "02/04"))
+        tasks.add(Task("Do homework", "Also study for test", "02/03"))
 
         binding.addButton.setOnClickListener {
             val action = ToDoListFragmentDirections.actionToDoListFragmentToAddFragment()
