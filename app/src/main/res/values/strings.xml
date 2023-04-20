@@ -7,5 +7,8 @@
     <string name="add_button_text">Add</string>
     <string name="new_task_name">New task</string>
     <string name="new_task_desc">Add description here</string>
+    <string name="delete_button">Delete</string>
+    <string name="done_button">Done</string>
+    <string name="to_tasks_button">To tasks!</string>
 
 </resources>

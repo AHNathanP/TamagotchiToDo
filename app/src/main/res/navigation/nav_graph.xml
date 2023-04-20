@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/toDoListFragment">
+    app:startDestination="@id/petFragment">
 
     <fragment
         android:id="@+id/toDoListFragment"
@@ -13,12 +13,6 @@
         <action
             android:id="@+id/action_toDoListFragment_to_addFragment"
             app:destination="@id/addFragment" />
-        <argument
-            android:name="taskNameArg"
-            app:argType="string" />
-        <argument
-            android:name="taskDescArg"
-            app:argType="string" />
         <action
             android:id="@+id/action_toDoListFragment_to_taskFragment"
             app:destination="@id/taskFragment" />
@@ -33,5 +27,21 @@
         android:id="@+id/taskFragment"
         android:name="com.example.tamagotchitodo.TaskFragment"
         android:label="fragment_task"
-        tools:layout="@layout/fragment_task" />
+        tools:layout="@layout/fragment_task" >
+        <argument
+            android:name="taskNameArg"
+            app:argType="string" />
+        <argument
+            android:name="taskDueDateArg"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/petFragment"
+        android:name="com.example.tamagotchitodo.PetFragment"
+        android:label="fragment_pet"
+        tools:layout="@layout/fragment_pet" >
+        <action
+            android:id="@+id/action_petFragment_to_toDoListFragment"
+            app:destination="@id/toDoListFragment" />
+    </fragment>
 </navigation>
