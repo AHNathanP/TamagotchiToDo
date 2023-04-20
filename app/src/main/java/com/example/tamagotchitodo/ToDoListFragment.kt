@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.findNavController
 import com.example.tamagotchitodo.databinding.FragmentToDoListBinding
 
@@ -16,13 +18,17 @@ class ToDoListFragment : Fragment() {
         savedInstanceState: Bundle?): View? {
         _binding = FragmentToDoListBinding.inflate(inflater, container, false)
         val rootView = binding.root
+        val tasks = mutableListOf(Task("Clean bedroom", "02/03"), Task("Buy groceries", "02/04"))
 
-        val tasks = mutableListOf(Task("Clean bedroom", "I need to clean my room", "02/03"),
-            Task("Buy groceries", "Be sure to get milk", "02/04"))
-        tasks.add(Task("Do homework", "Also study for test", "02/03"))
+        setFragmentResultListener("REQUESTING_NAME_KEY") { nameKey: String, bundle: Bundle ->
+            val newTask = bundle.getString("NAME_KEY")
+            val task = Task(newTask!!, "02/05")
+            tasks.add(task)
+        }
 
         binding.addButton.setOnClickListener {
-            rootView.findNavController().navigate(R.id.action_toDoListFragment_to_addFragment)
+            val action = ToDoListFragmentDirections.actionToDoListFragmentToAddFragment()
+            rootView.findNavController().navigate(action)
         }
 
         val myAdapter = TaskAdapter(tasks)

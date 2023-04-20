@@ -13,10 +13,25 @@
         <action
             android:id="@+id/action_toDoListFragment_to_addFragment"
             app:destination="@id/addFragment" />
+        <argument
+            android:name="taskNameArg"
+            app:argType="string" />
+        <argument
+            android:name="taskDescArg"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_toDoListFragment_to_taskFragment"
+            app:destination="@id/taskFragment" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
         android:name="com.example.tamagotchitodo.AddFragment"
         android:label="fragment_add"
-        tools:layout="@layout/fragment_add" />
+        tools:layout="@layout/fragment_add" >
+    </fragment>
+    <fragment
+        android:id="@+id/taskFragment"
+        android:name="com.example.tamagotchitodo.TaskFragment"
+        android:label="fragment_task"
+        tools:layout="@layout/fragment_task" />
 </navigation>
