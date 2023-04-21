@@ -43,5 +43,13 @@
         <action
             android:id="@+id/action_petFragment_to_toDoListFragment"
             app:destination="@id/toDoListFragment" />
+        <action
+            android:id="@+id/action_petFragment_to_choosePetFragment"
+            app:destination="@id/choosePetFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/choosePetFragment"
+        android:name="com.example.tamagotchitodo.ChoosePetFragment"
+        android:label="fragment_choose_pet"
+        tools:layout="@layout/fragment_choose_pet" />
 </navigation>

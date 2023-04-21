@@ -22,6 +22,10 @@ class PetFragment : Fragment() {
             val action = PetFragmentDirections.actionPetFragmentToToDoListFragment()
             rootView.findNavController().navigate(action)
         }
+        binding.petImage.setOnClickListener {
+            val action = PetFragmentDirections.actionPetFragmentToChoosePetFragment()
+            rootView.findNavController().navigate(action)
+        }
 
         return rootView
     }

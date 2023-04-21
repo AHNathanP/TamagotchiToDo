@@ -1,5 +1,6 @@
 package com.example.tamagotchitodo
 
+import android.util.Property
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
