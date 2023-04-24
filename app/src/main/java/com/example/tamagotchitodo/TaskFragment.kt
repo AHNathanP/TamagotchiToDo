@@ -34,6 +34,9 @@ class TaskFragment : Fragment() {
                 }
                 .show()
         }
+        binding.doneButton.setOnClickListener {
+            rootView.findNavController().navigateUp()
+        }
 
         return rootView
     }
