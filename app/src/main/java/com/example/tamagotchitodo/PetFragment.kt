@@ -22,13 +22,13 @@ class PetFragment : Fragment() {
         setFragmentResultListener("REQUESTING_IMAGE_KEY") { requestKey: String, bundle: Bundle ->
             val imageKey = bundle.getInt("IMAGE_KEY")
             if (imageKey == 1) {
-                //TODO: make pet image cat
+                binding.petImage.setImageResource(R.drawable.cat_pet)
             }
             if (imageKey == 2) {
-                //TODO: make pet image lizard
+                binding.petImage.setImageResource(R.drawable.lizard_pet)
             }
             if (imageKey == 3) {
-                //TODO: make pet image Pikachu
+                binding.petImage.setImageResource(R.drawable.pikachu_pet)
             }
         }
         setFragmentResultListener("REQUESTING_NAME_KEY") { requestKeyTwo: String, bundleTwo: Bundle ->
