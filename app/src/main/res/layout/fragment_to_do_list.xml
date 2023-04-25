@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/to_do_list_fragment"
-    tools:context=".ToDoListFragment">
+    tools:context=".ToDoListFragment"
+    android:background="#A9B6F8">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -25,7 +26,7 @@
         android:layout_margin="30dp"
         android:textColor="#000000"
         android:text="@string/back_button_text"
-        app:backgroundTint="#5F92DF"
+        app:backgroundTint="#9CE8B2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +40,7 @@
         android:layout_margin="30dp"
         android:textColor="#000000"
         android:text="@string/add_button_text"
-        app:backgroundTint="#5F92DF"
+        app:backgroundTint="#9CE8B2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChoosePetFragment">
+    tools:context=".ChoosePetFragment"
+    android:background="#4765FF">
 
     <TextView
         android:id="@+id/pet_name_intro"
@@ -14,7 +15,8 @@
         android:text="@string/pet_name_intro"
         android:textSize="30sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/pet_name_edit"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="#FFFFFF"/>
 
     <EditText
         android:id="@+id/pet_name_edit"
@@ -26,7 +28,8 @@
         app:layout_constraintStart_toEndOf="@+id/pet_name_intro"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="16dp"
-        app:layout_constraintHorizontal_bias="0.06"/>
+        app:layout_constraintHorizontal_bias="0.06"
+        android:textColor="#FFFFFF"/>
 
     <ImageButton
         android:id="@+id/petChoiceOne"
@@ -35,10 +38,11 @@
         android:src="@drawable/cat_pet"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintVertical_bias="0.3"/>
+        app:layout_constraintVertical_bias="0.3"
+        android:scaleType="centerCrop"/>
 
     <ImageButton
         android:id="@+id/petChoiceTwo"
@@ -49,7 +53,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/petChoiceOne"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3"/>
+        app:layout_constraintVertical_bias="0.3"
+        android:scaleType="centerCrop"/>
 
     <ImageButton
         android:id="@+id/petChoiceThree"
@@ -60,7 +65,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/petChoiceOne"
-        app:layout_constraintVertical_bias="0.2"/>
+        app:layout_constraintVertical_bias="0.2"
+        android:scaleType="centerCrop"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
