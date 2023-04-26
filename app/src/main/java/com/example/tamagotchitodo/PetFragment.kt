@@ -13,6 +13,7 @@ import com.example.tamagotchitodo.databinding.FragmentPetBinding
 class PetFragment : Fragment() {
     private var _binding: FragmentPetBinding? = null
     private val binding get() = _binding!!
+    lateinit var petName:String
     private val viewModel: StatusViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -20,13 +21,19 @@ class PetFragment : Fragment() {
         savedInstanceState: Bundle?): View? {
         _binding = FragmentPetBinding.inflate(inflater, container, false)
         val rootView = binding.root
+        petName = ""
+        val petImageKey = viewModel.getPetImageKey()
+        if (petImageKey!=0) {
+            setImage(petImageKey)
+        }
 
         setFragmentResultListener("REQUESTING_IMAGE_KEY") { requestKey: String, bundle: Bundle ->
             val imageKey = bundle.getInt("IMAGE_KEY")
             setImage(imageKey)
         }
         setFragmentResultListener("REQUESTING_NAME_KEY") { requestKeyTwo: String, bundleTwo: Bundle ->
-            val petName = bundleTwo.getString("NAME_KEY")
+            petName = bundleTwo.getString("NAME_KEY")?:""
+            viewModel.setPetName(petName)
             binding.petStatusName.text = "$petName is:"
             setStatus()
         }
@@ -43,13 +50,18 @@ class PetFragment : Fragment() {
         return rootView
     }
     fun setStatus() {
+        val name = viewModel.getPetName()
         val numOfTasksDone = viewModel.numOfTasksDone.value?:0
-        if (numOfTasksDone < 5) {
-            binding.petStatusFeeling.text = getString(R.string.pet_status_sad)
+        var message = ""
+        if (numOfTasksDone < 5 && !name.equals("")) {
+            binding.petStatusName.text = "$name is:"
+            message+= getString(R.string.pet_status_sad)
         }
-        else {
-            binding.petStatusFeeling.text = getString(R.string.pet_status_happy)
+        else if(numOfTasksDone >= 5 && !name.equals("")){
+            binding.petStatusName.text = "$name is:"
+            message+= getString(R.string.pet_status_happy)
         }
+        binding.petStatusFeeling.text = message
     }
     fun setImage(imageKey: Int) {
         if (imageKey == 1) {
