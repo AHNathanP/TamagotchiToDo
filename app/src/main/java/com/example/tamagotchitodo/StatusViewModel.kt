@@ -14,6 +14,9 @@ class StatusViewModel: ViewModel() {
     private var _petName = MutableLiveData("")
     val petName: LiveData<String>
         get() = _petName
+    private var _listOfTasks = MutableLiveData(mutableListOf<Task>())
+    val listOfTasks: LiveData<MutableList<Task>>
+        get() = _listOfTasks
 
     fun updateTasksDone(taskDone: Int) {
         val currentTasksDone = numOfTasksDone.value?:0
@@ -30,5 +33,8 @@ class StatusViewModel: ViewModel() {
     }
     fun getPetName(): String {
         return _petName.value?:""
+    }
+    fun addTask(task: Task) {
+        _listOfTasks.value?.add(task)
     }
 }

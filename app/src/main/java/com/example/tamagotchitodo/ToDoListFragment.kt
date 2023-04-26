@@ -19,17 +19,15 @@ class ToDoListFragment : Fragment() {
     lateinit var dbRef : DatabaseReference
     private val viewModel: StatusViewModel by activityViewModels()
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentToDoListBinding.inflate(inflater, container, false)
         val rootView = binding.root
         dbRef = Firebase.database.reference
-        val tasks = mutableListOf(Task("Clean bedroom", "02/03"), Task("Buy groceries", "02/04"))
 
         setFragmentResultListener("REQUESTING_NAME_KEY") { nameKey: String, bundle: Bundle ->
             val newTask = bundle.getString("NAME_KEY")
-            val task = Task(newTask!!, "02/05")
-            tasks.add(task)
+            val task = Task(newTask?:"", "02/05")
+            viewModel.addTask(task)
         }
 
         binding.addButton.setOnClickListener {
@@ -40,7 +38,8 @@ class ToDoListFragment : Fragment() {
             rootView.findNavController().navigateUp()
         }
 
-        val myAdapter = TaskAdapter(tasks)
+        val taskList = viewModel.listOfTasks.value?: mutableListOf()
+        val myAdapter = TaskAdapter(taskList, viewModel)
         binding.recyclerView.adapter = myAdapter
 
         return rootView
