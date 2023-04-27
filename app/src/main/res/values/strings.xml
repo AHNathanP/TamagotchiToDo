@@ -18,5 +18,6 @@
     <string name="alert_negative">No</string>
     <string name="pet_status_happy">happy!</string>
     <string name="pet_status_sad">sad...</string>
+    <string name="pet_status_super_happy">super happy!!</string>
 
 </resources>

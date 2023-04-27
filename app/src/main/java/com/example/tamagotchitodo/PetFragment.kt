@@ -53,13 +53,17 @@ class PetFragment : Fragment() {
         val name = viewModel.getPetName()
         val numOfTasksDone = viewModel.numOfTasksDone.value?:0
         var message = ""
-        if (numOfTasksDone < 5 && !name.equals("")) {
+        if (numOfTasksDone < 3 && name != "") {
             binding.petStatusName.text = "$name is:"
             message+= getString(R.string.pet_status_sad)
         }
-        else if(numOfTasksDone >= 5 && !name.equals("")){
+        else if(numOfTasksDone in 3..9 && name != ""){
             binding.petStatusName.text = "$name is:"
             message+= getString(R.string.pet_status_happy)
+        }
+        else if(numOfTasksDone >= 10 && name!="") {
+            binding.petStatusName.text = "$name is:"
+            message += getString(R.string.pet_status_super_happy)
         }
         binding.petStatusFeeling.text = message
     }

@@ -17,6 +17,9 @@ class StatusViewModel: ViewModel() {
     private var _listOfTasks = MutableLiveData(mutableListOf<Task>())
     val listOfTasks: LiveData<MutableList<Task>>
         get() = _listOfTasks
+    private var _taskKey = MutableLiveData(0)
+    val taskKey: LiveData<Int>
+        get() = _taskKey
 
     fun updateTasksDone(taskDone: Int) {
         val currentTasksDone = numOfTasksDone.value?:0
@@ -36,5 +39,18 @@ class StatusViewModel: ViewModel() {
     }
     fun addTask(task: Task) {
         _listOfTasks.value?.add(task)
+    }
+    fun deleteTask(position: Int) {
+       listOfTasks.value?.removeAt(position)
+        updateTasksDone(1)
+    }
+    fun deleteTaskWithoutUpdate(position: Int) {
+        listOfTasks.value?.removeAt(position)
+    }
+    fun setTaskKey(index: Int) {
+        _taskKey.value = index
+    }
+    fun getTaskKey(): Int {
+        return _taskKey.value?:0
     }
 }

@@ -13,6 +13,7 @@ class TaskAdapter(val taskList: MutableList<Task>, val viewModel: StatusViewMode
 
         init {
             binding.root.setOnClickListener { view ->
+                viewModel.setTaskKey(this.position)
                 val taskName = currentTask.taskName
                 val taskDueDate = currentTask.dueBy
                 val action = ToDoListFragmentDirections
@@ -20,7 +21,8 @@ class TaskAdapter(val taskList: MutableList<Task>, val viewModel: StatusViewMode
                 binding.root.findNavController().navigate(action)
             }
             binding.checkbox.setOnClickListener {
-                deleteItem(this.position)
+                viewModel.deleteTask(this.position)
+                notifyItemRemoved(this.position)
             }
         }
 
@@ -42,9 +44,5 @@ class TaskAdapter(val taskList: MutableList<Task>, val viewModel: StatusViewMode
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val currentTask = taskList[position]
         holder.bindTask(currentTask)
-    }
-    fun deleteItem(index: Int) {
-        taskList.removeAt(index)
-        notifyItemRemoved(index)
     }
 }
