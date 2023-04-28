@@ -1,5 +1,6 @@
 package com.example.tamagotchitodo
 
+import android.icu.util.Calendar
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.findNavController
 import com.example.tamagotchitodo.databinding.FragmentPetBinding
+import java.text.SimpleDateFormat
 
 class PetFragment : Fragment() {
     private var _binding: FragmentPetBinding? = null
@@ -21,6 +23,12 @@ class PetFragment : Fragment() {
         savedInstanceState: Bundle?): View? {
         _binding = FragmentPetBinding.inflate(inflater, container, false)
         val rootView = binding.root
+
+        var calendar: Calendar = Calendar.getInstance()
+        var simpleDateFormat: SimpleDateFormat = SimpleDateFormat("EEEE, LLLL dd, KK:mm aaa")
+        var dateTime : String = simpleDateFormat.format(calendar.time).toString()
+        binding.dateTimeTwo.text = dateTime
+
         petName = ""
         val petImageKey = viewModel.getPetImageKey()
         if (petImageKey!=0) {

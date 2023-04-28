@@ -20,5 +20,6 @@
     <string name="pet_status_happy">happy!</string>
     <string name="pet_status_sad">sad...</string>
     <string name="pet_status_super_happy">super happy!!</string>
+    <string name="date_time_message">Today is</string>
 
 </resources>
