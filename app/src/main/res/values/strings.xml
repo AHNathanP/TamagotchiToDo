@@ -3,6 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="task_due_by">Due by:</string>
+    <string name="task_due_by_edit">Date here</string>
     <string name="back_button_text">Back</string>
     <string name="add_button_text">Add</string>
     <string name="new_task_name">New task</string>
