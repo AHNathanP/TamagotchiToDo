@@ -5,43 +5,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PetFragment"
-    android:background="#4765FF">
+    android:background="#3B7FD1">
+
+    <TextView
+        android:id="@+id/welcome_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/welcome_message"
+        android:layout_margin="16dp"/>
 
     <TextView
         android:id="@+id/petStatusName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textColor="#FFFFFF"
         android:textSize="30sp"
         app:layout_constraintEnd_toStartOf="@id/petStatusFeeling"
+        app:layout_constraintHorizontal_bias="0.99"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Your pet is:"
-        android:layout_margin="16dp"
-        app:layout_constraintHorizontal_bias="0.99"
-        android:textColor="#FFFFFF"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.08"
+        tools:text="Your pet is:" />
+
     <TextView
-        android:id = "@+id/petStatusFeeling"
+        android:id="@+id/petStatusFeeling"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize = "30sp"
+        android:layout_margin="16dp"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text = "happy"
-        android:layout_margin="16dp"
-        app:layout_constraintHorizontal_bias="0.8"
-        android:textColor="#FFFFFF"/>
+        app:layout_constraintVertical_bias="0.08"
+        tools:text="happy" />
+
 
     <ImageButton
         android:id="@+id/petImage"
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:src="@drawable/ic_pet_placeholder"
-        app:layout_constraintVertical_bias="0.35"
+        app:layout_constraintVertical_bias="0.4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/petStatusName"
+        app:layout_constraintTop_toTopOf="parent"
         android:scaleType="centerCrop"/>
 
     <Button

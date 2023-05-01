@@ -23,10 +23,15 @@ class ToDoListFragment : Fragment() {
         _binding = FragmentToDoListBinding.inflate(inflater, container, false)
         val rootView = binding.root
         dbRef = Firebase.database.reference
+        var newTaskName = ""
+        var newTaskDueDate = ""
 
         setFragmentResultListener("REQUESTING_NAME_KEY") { nameKey: String, bundle: Bundle ->
-            val newTask = bundle.getString("NAME_KEY")
-            val task = Task(newTask?:"", "02/05")
+            newTaskName = bundle.getString("NAME_KEY")?:""
+        }
+        setFragmentResultListener("REQUESTING_TIME_KEY") { timeKey: String, bundle: Bundle ->
+            newTaskDueDate = bundle.getString("TIME_KEY")?:""
+            val task = Task(newTaskName, newTaskDueDate)
             viewModel.addTask(task)
         }
 

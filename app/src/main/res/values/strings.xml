@@ -21,5 +21,10 @@
     <string name="pet_status_sad">sad...</string>
     <string name="pet_status_super_happy">super happy!!</string>
     <string name="date_time_message">Today is</string>
+    <string name="edit_due_date_month">MM</string>
+    <string name="due_date_slash">/</string>
+    <string name="edit_due_date_day">DD</string>
+    <string name="toast_message">Please enter a valid date</string>
+    <string name="welcome_message">Welcome to Tamagotchi To Do!</string>
 
 </resources>
