@@ -10,16 +10,22 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.findNavController
 import com.example.tamagotchitodo.databinding.FragmentAddBinding
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class AddFragment : Fragment() {
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
+    lateinit var dbRef : DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         _binding = FragmentAddBinding.inflate(inflater, container, false)
         val rootView = binding.root
+
+        dbRef = Firebase.database.reference
 
         binding.addButtonAddFrag.setOnClickListener {
             val taskName = binding.newTaskName.text.toString()
@@ -35,6 +41,8 @@ class AddFragment : Fragment() {
                     val dueDate = "$dueDateMonth/$dueDateDay"
                     setFragmentResult("REQUESTING_NAME_KEY", bundleOf("NAME_KEY" to taskName))
                     setFragmentResult("REQUESTING_TIME_KEY", bundleOf("TIME_KEY" to dueDate))
+//                    val task = Task(taskName, dueDate) TODO: For firebase
+//                    dbRef.child("tasks").push().setValue(task)
                     rootView.findNavController().navigateUp()
                 }
                 else {
