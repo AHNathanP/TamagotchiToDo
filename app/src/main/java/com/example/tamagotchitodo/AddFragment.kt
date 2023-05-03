@@ -41,8 +41,8 @@ class AddFragment : Fragment() {
                     val dueDate = "$dueDateMonth/$dueDateDay"
                     setFragmentResult("REQUESTING_NAME_KEY", bundleOf("NAME_KEY" to taskName))
                     setFragmentResult("REQUESTING_TIME_KEY", bundleOf("TIME_KEY" to dueDate))
-//                    val task = Task(taskName, dueDate) TODO: For firebase
-//                    dbRef.child("tasks").push().setValue(task)
+                    //val task = Task(taskName, dueDate)
+                    //dbRef.child("tasks").push().setValue(task)
                     rootView.findNavController().navigateUp()
                 }
                 else {

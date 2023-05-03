@@ -22,14 +22,14 @@ class ToDoListFragment : Fragment() {
     private var _binding: FragmentToDoListBinding? = null
     private val binding get() = _binding!!
     lateinit var dbRef : DatabaseReference
-    //lateinit var taskList: MutableList<Task> TODO: For firebase
+    //lateinit var taskList: MutableList<Task>
     private val viewModel: StatusViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentToDoListBinding.inflate(inflater, container, false)
         val rootView = binding.root
         dbRef = Firebase.database.reference
-        //taskList = mutableListOf() TODO: For firebase
+        //taskList = viewModel.listOfTasks.value?: mutableListOf()
 
         var newTaskName = ""
         var newTaskDueDate = ""
@@ -55,7 +55,7 @@ class ToDoListFragment : Fragment() {
         val myAdapter = TaskAdapter(taskList, viewModel)
         binding.recyclerView.adapter = myAdapter
 
-//        dbRef.addValueEventListener(object: ValueEventListener { TODO: For firebase
+//        dbRef.addValueEventListener(object: ValueEventListener {
 //            override fun onDataChange(snapshot: DataSnapshot) {
 //                val allDBEntries = snapshot.children
 //
@@ -64,14 +64,19 @@ class ToDoListFragment : Fragment() {
 //                for (allTaskEntries in allDBEntries) {
 //                    for (singleTaskEntry in allTaskEntries.children) {
 //                        numOfTasksAdded++
-//                        val taskName = singleTaskEntry.child("name").getValue().toString()
-//                        val taskDueDate = singleTaskEntry.child("dueDate").getValue().toString()
+//                        val taskName = singleTaskEntry.child("name").getValue()//.toString()
+//                        val taskDueDate = singleTaskEntry.child("dueDate").getValue()//.toString()
+//                        if (!(taskName == null || taskDueDate == null)) {
+//                            val name = singleTaskEntry.child("name").getValue().toString()
+//                            val dueDate = singleTaskEntry.child("name").getValue().toString()
+//                            val currentTask = Task(name, dueDate)
+//                            taskList.add(currentTask)
+//                            viewModel.addTask(currentTask)
+//                            myAdapter.notifyDataSetChanged()
+//                        }
+//                        //val currentTask = Task(taskName, taskDueDate)
+//                        //taskList.add(currentTask)
 //
-//                        val currentTask = Task(taskName, taskDueDate)
-//                        taskList.add(currentTask)
-//
-//
-//                        myAdapter.notifyDataSetChanged()
 //                    }
 //                }
 //            }

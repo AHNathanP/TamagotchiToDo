@@ -3,6 +3,9 @@ package com.example.tamagotchitodo
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.util.Calendar
 
 class StatusViewModel: ViewModel() {
     private var _numOfTasksDone = MutableLiveData(0)
