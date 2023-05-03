@@ -15,7 +15,9 @@ class TaskAdapter(val taskList: MutableList<Task>, val viewModel: StatusViewMode
             binding.root.setOnClickListener { view ->
                 viewModel.setTaskKey(this.position)
                 val taskName = currentTask.taskName
-                val taskDueDate = currentTask.dueBy
+                val taskDueMonth = currentTask.monthDue
+                val taskDueDay = currentTask.dayDue
+                val taskDueDate = "$taskDueMonth/$taskDueDay"
                 val action = ToDoListFragmentDirections
                     .actionToDoListFragmentToTaskFragment(taskName, taskDueDate)
                 binding.root.findNavController().navigate(action)
@@ -29,7 +31,8 @@ class TaskAdapter(val taskList: MutableList<Task>, val viewModel: StatusViewMode
         fun bindTask(task: Task) {
             currentTask = task
             binding.taskName.text = currentTask.taskName
-            binding.taskDueDateDate.text = currentTask.dueBy
+            val taskDueDate = "${task.monthDue}/${task.dayDue}"
+            binding.taskDueDateDate.text = taskDueDate
         }
     }
     override fun getItemCount(): Int {

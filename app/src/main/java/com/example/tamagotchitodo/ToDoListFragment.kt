@@ -32,15 +32,19 @@ class ToDoListFragment : Fragment() {
         //taskList = viewModel.listOfTasks.value?: mutableListOf()
 
         var newTaskName = ""
-        var newTaskDueDate = ""
+        var newTaskDueMonth = 0
+        var newTaskDueDay = 0
 
         setFragmentResultListener("REQUESTING_NAME_KEY") { nameKey: String, bundle: Bundle ->
             newTaskName = bundle.getString("NAME_KEY")?:""
         }
-        setFragmentResultListener("REQUESTING_TIME_KEY") { timeKey: String, bundle: Bundle ->
-            newTaskDueDate = bundle.getString("TIME_KEY")?:""
-            val task = Task(newTaskName, newTaskDueDate)
-            viewModel.addTask(task)
+        setFragmentResultListener("REQUESTING_MONTH_KEY") { monthKey: String, bundle: Bundle ->
+            newTaskDueMonth = bundle.getInt("MONTH_KEY")?:0
+        }
+        setFragmentResultListener("REQUESTING_DAY_KEY") { dayKey: String, bundle: Bundle ->
+            newTaskDueDay = bundle.getInt("DAY_KEY")?:0
+            val newTask = Task(newTaskName, newTaskDueMonth, newTaskDueDay)
+            viewModel.addTask(newTask)
         }
 
         binding.addButton.setOnClickListener {

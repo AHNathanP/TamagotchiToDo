@@ -26,7 +26,7 @@ class PetFragment : Fragment() {
         val rootView = binding.root
 
         var calendar: Calendar = Calendar.getInstance()
-        var simpleDateFormat: SimpleDateFormat = SimpleDateFormat("EEEE, LLLL dd, KK:mm aaa")
+        var simpleDateFormat: SimpleDateFormat = SimpleDateFormat("EEE, LLLL dd, KK:mm aaa")
         var dateTime : String = simpleDateFormat.format(calendar.time).toString()
         binding.dateTimeTwo.text = dateTime
 
@@ -62,6 +62,16 @@ class PetFragment : Fragment() {
         val name = viewModel.getPetName()
         val numOfTasksDone = viewModel.numOfTasksDone.value?:0
         var message = ""
+        var checkAllDates = false
+        for (task in viewModel.listOfTasks.value?: mutableListOf()) {
+            val month = task.monthDue
+            val day = task.dayDue
+            if(!(viewModel.checkTime(month, day))) {
+                binding.petStatusName.text = "$name is:"
+                message+= getString(R.string.pet_status_super_sad)
+                checkAllDates = true
+            }
+        }
         if (numOfTasksDone < 3 && name != "") {
             binding.petStatusName.text = "$name is:"
             message+= getString(R.string.pet_status_sad)

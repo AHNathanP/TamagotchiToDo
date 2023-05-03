@@ -20,6 +20,7 @@
     <string name="pet_status_happy">happy!</string>
     <string name="pet_status_sad">sad...</string>
     <string name="pet_status_super_happy">super happy!!</string>
+    <string name="pet_status_super_sad">super sad!</string>
     <string name="date_time_message">Today is</string>
     <string name="edit_due_date_month">MM</string>
     <string name="due_date_slash">/</string>
