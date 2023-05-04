@@ -61,28 +61,31 @@ class PetFragment : Fragment() {
     fun setStatus() {
         val name = viewModel.getPetName()
         val numOfTasksDone = viewModel.numOfTasksDone.value?:0
+        var checkAllDates = true
         var message = ""
-        var checkAllDates = false
+
         for (task in viewModel.listOfTasks.value?: mutableListOf()) {
             val month = task.monthDue
             val day = task.dayDue
-            if(!(viewModel.checkTime(month, day))) {
+            if(!(viewModel.checkTime(month, day)) && checkAllDates) {
                 binding.petStatusName.text = "$name is:"
-                message+= getString(R.string.pet_status_super_sad)
-                checkAllDates = true
+                message = getString(R.string.pet_status_super_sad)
+                checkAllDates = false
             }
         }
-        if (numOfTasksDone < 3 && name != "") {
-            binding.petStatusName.text = "$name is:"
-            message+= getString(R.string.pet_status_sad)
-        }
-        else if(numOfTasksDone in 3..9 && name != ""){
-            binding.petStatusName.text = "$name is:"
-            message+= getString(R.string.pet_status_happy)
-        }
-        else if(numOfTasksDone >= 10 && name!="") {
-            binding.petStatusName.text = "$name is:"
-            message += getString(R.string.pet_status_super_happy)
+        if (checkAllDates) {
+            if (numOfTasksDone < 3 && name != "") {
+                binding.petStatusName.text = "$name is:"
+                message = getString(R.string.pet_status_sad)
+            }
+            else if(numOfTasksDone in 3..9 && name != ""){
+                binding.petStatusName.text = "$name is:"
+                message = getString(R.string.pet_status_happy)
+            }
+            else if(numOfTasksDone >= 10 && name!="") {
+                binding.petStatusName.text = "$name is:"
+                message = getString(R.string.pet_status_super_happy)
+            }
         }
         binding.petStatusFeeling.text = message
     }

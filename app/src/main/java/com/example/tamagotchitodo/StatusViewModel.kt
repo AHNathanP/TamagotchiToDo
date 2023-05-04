@@ -1,5 +1,6 @@
 package com.example.tamagotchitodo
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -57,7 +58,10 @@ class StatusViewModel: ViewModel() {
     }
     fun checkTime(monthOfDueDate: Int, dayOfDueDate: Int):Boolean {
         val month = Calendar.MONTH
+
         val dayOfMonth = Calendar.DAY_OF_MONTH
+        Log.i("ViewModel", "Month is $month")
+        Log.i("ViewModel", "Day is $dayOfMonth")
 
         if (monthOfDueDate <= month) {
             return true
