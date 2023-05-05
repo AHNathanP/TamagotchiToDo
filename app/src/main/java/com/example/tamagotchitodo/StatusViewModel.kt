@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import java.text.SimpleDateFormat
 import java.util.Calendar
 
 class StatusViewModel: ViewModel() {
@@ -22,7 +23,9 @@ class StatusViewModel: ViewModel() {
     private var _taskKey = MutableLiveData(0)
     val taskKey: LiveData<Int>
         get() = _taskKey
-    private var weekYear = 0
+    private var _weekYear = MutableLiveData(0)
+    val weekYear: LiveData<Int>
+        get() = _weekYear
 
     fun updateTasksDone(taskDone: Int) {
         val currentTasksDone = numOfTasksDone.value?:0
@@ -57,18 +60,22 @@ class StatusViewModel: ViewModel() {
         return _taskKey.value?:0
     }
     fun checkTime(monthOfDueDate: Int, dayOfDueDate: Int):Boolean {
-        val month = Calendar.MONTH
+        val calendar = Calendar.getInstance()
+        var month : Int = SimpleDateFormat("L").format(calendar.time).toInt()
+        var day : Int = SimpleDateFormat("d").format(calendar.time).toInt()
+        Log.i("ViewModel", "Today is $month, $day")
 
-        val dayOfMonth = Calendar.DAY_OF_MONTH
-        Log.i("ViewModel", "Month is $month")
-        Log.i("ViewModel", "Day is $dayOfMonth")
-
-        if (monthOfDueDate <= month) {
-            return true
+        if (monthOfDueDate < month) {
+            return false
         }
-        if (monthOfDueDate == month && dayOfDueDate < dayOfMonth) {
-            return true
+        if (monthOfDueDate == month && dayOfDueDate < day) {
+            return false
         }
-        return false
+        return true
+    }
+    fun setWeekYear(weekYearSet: Int) {
+        if (weekYearSet > (_weekYear.value ?: 0)) {
+            _weekYear.value = weekYearSet
+        }
     }
 }

@@ -12,6 +12,7 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.findNavController
 import com.example.tamagotchitodo.databinding.FragmentPetBinding
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 
 class PetFragment : Fragment() {
     private var _binding: FragmentPetBinding? = null
@@ -63,6 +64,8 @@ class PetFragment : Fragment() {
         val numOfTasksDone = viewModel.numOfTasksDone.value?:0
         var checkAllDates = true
         var message = ""
+        var weekYear = SimpleDateFormat("w").format(Calendar.getInstance().time).toInt()
+        viewModel.setWeekYear(weekYear)
 
         for (task in viewModel.listOfTasks.value?: mutableListOf()) {
             val month = task.monthDue
