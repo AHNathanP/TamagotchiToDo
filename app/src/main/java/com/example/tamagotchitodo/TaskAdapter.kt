@@ -2,7 +2,6 @@ package com.example.tamagotchitodo
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tamagotchitodo.databinding.ListItemLayoutBinding

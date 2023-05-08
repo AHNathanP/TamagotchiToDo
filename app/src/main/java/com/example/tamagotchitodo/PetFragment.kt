@@ -6,13 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.findNavController
 import com.example.tamagotchitodo.databinding.FragmentPetBinding
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 
 class PetFragment : Fragment() {
     private var _binding: FragmentPetBinding? = null
@@ -32,7 +30,7 @@ class PetFragment : Fragment() {
         binding.dateTimeTwo.text = dateTime
 
         petName = ""
-        val petImageKey = viewModel.getPetImageKey()
+        val petImageKey = viewModel.petImageKey.value?:0
         if (petImageKey!=0) {
             setImage(petImageKey)
         }
@@ -60,37 +58,34 @@ class PetFragment : Fragment() {
         return rootView
     }
     fun setStatus() {
-        val name = viewModel.getPetName()
         val numOfTasksDone = viewModel.numOfTasksDone.value?:0
         var checkAllDates = true
         var message = ""
-        var weekYear = SimpleDateFormat("w").format(Calendar.getInstance().time).toInt()
-        viewModel.setWeekYear(weekYear)
 
         for (task in viewModel.listOfTasks.value?: mutableListOf()) {
             val month = task.monthDue
             val day = task.dayDue
             if(!(viewModel.checkTime(month, day)) && checkAllDates) {
-                binding.petStatusName.text = "$name is:"
-                message = getString(R.string.pet_status_super_sad)
+                binding.petStatusName.text = "${viewModel.petName.value} is:"
+                viewModel.setPetStatus(getString(R.string.pet_status_super_sad))
                 checkAllDates = false
             }
         }
-        if (checkAllDates) {
-            if (numOfTasksDone < 3 && name != "") {
-                binding.petStatusName.text = "$name is:"
-                message = getString(R.string.pet_status_sad)
+        if (checkAllDates && (viewModel.petName.value ?: "") != "") {
+            if (numOfTasksDone < 3) {
+                binding.petStatusName.text = "${viewModel.petName.value} is:"
+                viewModel.setPetStatus(getString(R.string.pet_status_sad))
             }
-            else if(numOfTasksDone in 3..9 && name != ""){
-                binding.petStatusName.text = "$name is:"
-                message = getString(R.string.pet_status_happy)
+            else if(numOfTasksDone in 3..9){
+                binding.petStatusName.text = "${viewModel.petName.value} is:"
+                viewModel.setPetStatus(getString(R.string.pet_status_happy))
             }
-            else if(numOfTasksDone >= 10 && name!="") {
-                binding.petStatusName.text = "$name is:"
-                message = getString(R.string.pet_status_super_happy)
+            else if(numOfTasksDone >= 10) {
+                binding.petStatusName.text = "${viewModel.petName.value} is:"
+                viewModel.setPetStatus(getString(R.string.pet_status_super_happy))
             }
         }
-        binding.petStatusFeeling.text = message
+        binding.petStatusFeeling.text = viewModel.petStatus.value
     }
     fun setImage(imageKey: Int) {
         if (imageKey == 1) {

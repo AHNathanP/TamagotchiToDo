@@ -41,8 +41,8 @@ class AddFragment : Fragment() {
                     setFragmentResult("REQUESTING_NAME_KEY", bundleOf("NAME_KEY" to taskName))
                     setFragmentResult("REQUESTING_MONTH_KEY", bundleOf("MONTH_KEY" to dueDateMonth))
                     setFragmentResult("REQUESTING_DAY_KEY", bundleOf("DAY_KEY" to dueDateDay))
-                    //val task = Task(taskName, dueDate)
-                    //dbRef.child("tasks").push().setValue(task)
+//                    val task = Task(taskName, dueDate)
+//                    dbRef.child("tasks").push().setValue(task)
                     rootView.findNavController().navigateUp()
                 }
                 else {

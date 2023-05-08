@@ -29,7 +29,7 @@ class TaskFragment : Fragment() {
                 .setTitle(R.string.alert_title)
                 .setMessage(R.string.alert_message)
                 .setPositiveButton(R.string.alert_positive) { dialog, which ->
-                    val index = viewModel.getTaskKey()
+                    val index = viewModel.taskKey.value?:0
                     viewModel.deleteTaskWithoutUpdate(index)
                     rootView.findNavController().navigateUp()
                 }
@@ -39,7 +39,7 @@ class TaskFragment : Fragment() {
                 .show()
         }
         binding.doneButton.setOnClickListener {
-            val index = viewModel.getTaskKey()
+            val index = viewModel.taskKey.value?:0
             viewModel.deleteTask(index)
             rootView.findNavController().navigateUp()
         }

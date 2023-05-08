@@ -1,6 +1,5 @@
 package com.example.tamagotchitodo
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,6 +25,9 @@ class StatusViewModel: ViewModel() {
     private var _weekYear = MutableLiveData(0)
     val weekYear: LiveData<Int>
         get() = _weekYear
+    private var _petStatus = MutableLiveData("")
+    val petStatus: LiveData<String>
+        get() = _petStatus
 
     fun updateTasksDone(taskDone: Int) {
         val currentTasksDone = numOfTasksDone.value?:0
@@ -34,14 +36,8 @@ class StatusViewModel: ViewModel() {
     fun setPetImageKey(key: Int) {
         _petImageKey.value = key
     }
-    fun getPetImageKey(): Int {
-        return _petImageKey.value?:0
-    }
     fun setPetName(name: String) {
         _petName.value = name
-    }
-    fun getPetName(): String {
-        return _petName.value?:""
     }
     fun addTask(task: Task) {
         _listOfTasks.value?.add(task)
@@ -56,14 +52,18 @@ class StatusViewModel: ViewModel() {
     fun setTaskKey(index: Int) {
         _taskKey.value = index
     }
-    fun getTaskKey(): Int {
-        return _taskKey.value?:0
+    fun setWeekYear(weekYearSet: Int) {
+        if (weekYearSet > (_weekYear.value ?: 0)) {
+            _weekYear.value = weekYearSet
+        }
+    }
+    fun setPetStatus(status: String) {
+        _petStatus.value = status
     }
     fun checkTime(monthOfDueDate: Int, dayOfDueDate: Int):Boolean {
         val calendar = Calendar.getInstance()
         var month : Int = SimpleDateFormat("L").format(calendar.time).toInt()
         var day : Int = SimpleDateFormat("d").format(calendar.time).toInt()
-        Log.i("ViewModel", "Today is $month, $day")
 
         if (monthOfDueDate < month) {
             return false
@@ -72,10 +72,5 @@ class StatusViewModel: ViewModel() {
             return false
         }
         return true
-    }
-    fun setWeekYear(weekYearSet: Int) {
-        if (weekYearSet > (_weekYear.value ?: 0)) {
-            _weekYear.value = weekYearSet
-        }
     }
 }

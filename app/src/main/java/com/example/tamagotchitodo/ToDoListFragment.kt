@@ -16,7 +16,7 @@ import androidx.fragment.app.activityViewModels
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.getValue
+
 
 class ToDoListFragment : Fragment() {
     private var _binding: FragmentToDoListBinding? = null
@@ -39,10 +39,10 @@ class ToDoListFragment : Fragment() {
             newTaskName = bundle.getString("NAME_KEY")?:""
         }
         setFragmentResultListener("REQUESTING_MONTH_KEY") { monthKey: String, bundle: Bundle ->
-            newTaskDueMonth = bundle.getInt("MONTH_KEY")?:0
+            newTaskDueMonth = bundle.getInt("MONTH_KEY")
         }
         setFragmentResultListener("REQUESTING_DAY_KEY") { dayKey: String, bundle: Bundle ->
-            newTaskDueDay = bundle.getInt("DAY_KEY")?:0
+            newTaskDueDay = bundle.getInt("DAY_KEY")
             val newTask = Task(newTaskName, newTaskDueMonth, newTaskDueDay)
             viewModel.addTask(newTask)
         }
