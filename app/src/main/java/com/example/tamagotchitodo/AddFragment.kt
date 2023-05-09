@@ -28,21 +28,21 @@ class AddFragment : Fragment() {
         dbRef = Firebase.database.reference
 
         binding.addButtonAddFrag.setOnClickListener {
-            val taskName = binding.newTaskName.text.toString()
-            val checkOne = binding.newTaskMonth.text.toString()
-            val checkTwo = binding.newTaskDay.text.toString()
-            if (checkOne=="" || checkTwo=="") {
+            val checkMonth = binding.newTaskMonth.text.toString()
+            val checkDay = binding.newTaskDay.text.toString()
+            if (checkMonth=="" || checkDay=="") {
                 Toast.makeText(requireContext(), R.string.toast_message, Toast.LENGTH_SHORT).show()
             }
             else {
-                val dueDateMonth = binding.newTaskMonth.text.toString().toInt()
-                val dueDateDay = binding.newTaskDay.text.toString().toInt()
+                val taskName = binding.newTaskName.text.toString()
+                val dueDateMonth = checkMonth.toInt()
+                val dueDateDay = checkDay.toInt()
                 if (checkDate(dueDateMonth, dueDateDay)) {
-                    setFragmentResult("REQUESTING_NAME_KEY", bundleOf("NAME_KEY" to taskName))
-                    setFragmentResult("REQUESTING_MONTH_KEY", bundleOf("MONTH_KEY" to dueDateMonth))
-                    setFragmentResult("REQUESTING_DAY_KEY", bundleOf("DAY_KEY" to dueDateDay))
-//                    val task = Task(taskName, dueDate)
-//                    dbRef.child("tasks").push().setValue(task)
+//                    setFragmentResult("REQUESTING_NAME_KEY", bundleOf("NAME_KEY" to taskName))      non-firebase stuff
+//                    setFragmentResult("REQUESTING_MONTH_KEY", bundleOf("MONTH_KEY" to dueDateMonth))
+//                    setFragmentResult("REQUESTING_DAY_KEY", bundleOf("DAY_KEY" to dueDateDay))
+                    val task = Task(taskName, dueDateMonth, dueDateDay)
+                    dbRef.child("tasks").push().setValue(task)
                     rootView.findNavController().navigateUp()
                 }
                 else {
