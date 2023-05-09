@@ -55,6 +55,7 @@ class StatusViewModel: ViewModel() {
     fun setWeekYear(weekYearSet: Int) {
         if (weekYearSet > (_weekYear.value ?: 0)) {
             _weekYear.value = weekYearSet
+            _numOfTasksDone.value = 0
         }
     }
     fun setPetStatus(status: String) {

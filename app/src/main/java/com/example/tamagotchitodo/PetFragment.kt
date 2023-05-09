@@ -54,6 +54,7 @@ class PetFragment : Fragment() {
             val action = PetFragmentDirections.actionPetFragmentToChoosePetFragment()
             rootView.findNavController().navigate(action)
         }
+        viewModel.setWeekYear(SimpleDateFormat("w").format(calendar.time).toInt())
         setStatus()
         return rootView
     }
