@@ -50,6 +50,10 @@ class AddFragment : Fragment() {
                 }
             }
         }
+        binding.tempDeleteButton.setOnClickListener {                                                //TODO: remove later
+            dbRef.child("tasks").removeValue()
+            rootView.findNavController().navigateUp()
+        }
         return rootView
     }
     fun checkDate(month: Int, day: Int): Boolean {
