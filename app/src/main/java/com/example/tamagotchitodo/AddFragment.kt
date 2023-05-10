@@ -35,8 +35,8 @@ class AddFragment : Fragment() {
             }
             else {
                 val taskName = binding.newTaskName.text.toString()
-                val dueDateMonth = checkMonth.toInt()
-                val dueDateDay = checkDay.toInt()
+                val dueDateMonth = binding.newTaskMonth.text.toString().toInt()
+                val dueDateDay = binding.newTaskDay.text.toString().toInt()
                 if (checkDate(dueDateMonth, dueDateDay)) {
 //                    setFragmentResult("REQUESTING_NAME_KEY", bundleOf("NAME_KEY" to taskName))      non-firebase stuff
 //                    setFragmentResult("REQUESTING_MONTH_KEY", bundleOf("MONTH_KEY" to dueDateMonth))

@@ -75,7 +75,7 @@ class ToDoListFragment : Fragment() {
                         if (singleTaskEntry.child("monthDue").getValue() != null
                             && singleTaskEntry.child("dayDue").getValue() != null) {
                             numOfTasksAdded++
-                            val taskName = singleTaskEntry.child("name").getValue().toString()
+                            val taskName = singleTaskEntry.child("taskName").getValue().toString()
                             val taskMonthDue = Integer.parseInt(singleTaskEntry.child("monthDue").getValue().toString())
                             val taskDayDue = Integer.parseInt(singleTaskEntry.child("dayDue").getValue().toString())
                             val currentTask = Task(taskName, taskMonthDue, taskDayDue)
