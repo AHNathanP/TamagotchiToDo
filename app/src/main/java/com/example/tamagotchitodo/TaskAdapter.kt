@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tamagotchitodo.databinding.ListItemLayoutBinding
+import com.google.android.material.snackbar.Snackbar
 
 class TaskAdapter(val taskList: MutableList<Task>, val viewModel: StatusViewModel): RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
     inner class TaskViewHolder(val binding: ListItemLayoutBinding): RecyclerView.ViewHolder(binding.root) {
@@ -23,6 +24,8 @@ class TaskAdapter(val taskList: MutableList<Task>, val viewModel: StatusViewMode
             }
             binding.checkbox.setOnClickListener {
                 viewModel.deleteTask(this.position)
+                val snackbar = Snackbar.make(binding.checkbox,
+                    R.string.snackbar_message, Snackbar.LENGTH_SHORT).show()
                 notifyItemRemoved(this.position)
             }
         }
