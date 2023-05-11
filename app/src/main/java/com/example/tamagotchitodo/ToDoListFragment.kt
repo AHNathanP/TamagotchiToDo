@@ -67,7 +67,6 @@ class ToDoListFragment : Fragment() {
         dbRef.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val allDBEntries = snapshot.children
-
                 var numOfTasksAdded = 0
 
                 for (allTaskEntries in allDBEntries) {

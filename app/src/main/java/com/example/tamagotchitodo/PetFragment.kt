@@ -19,7 +19,6 @@ import java.text.SimpleDateFormat
 class PetFragment : Fragment() {
     private var _binding: FragmentPetBinding? = null
     private val binding get() = _binding!!
-//    lateinit var petName:String                                                                     non-firebase stuff
     private val viewModel: StatusViewModel by activityViewModels()
     lateinit var dbRef : DatabaseReference
 
@@ -35,23 +34,6 @@ class PetFragment : Fragment() {
         var dateTime : String = simpleDateFormat.format(calendar.time).toString()
         binding.dateTimeTwo.text = dateTime
 
-//        petName = ""                                                                               non-firebase stuff
-//        val petImageKey = viewModel.petImageKey.value?:0
-//        if (petImageKey!=0) {
-//            setImage(petImageKey)
-//        }
-
-//        setFragmentResultListener("REQUESTING_IMAGE_KEY") { requestKey: String, bundle: Bundle ->  non-firebase stuff
-//            val imageKey = bundle.getInt("IMAGE_KEY")
-//            setImage(imageKey)
-//        }
-//        setFragmentResultListener("REQUESTING_NAME_KEY") { requestKeyTwo: String, bundleTwo: Bundle ->
-//            petName = bundleTwo.getString("NAME_KEY")?:""
-//            viewModel.setPetName(petName)
-//            binding.petStatusName.text = "$petName is:"
-//            setStatus()
-//        }
-
         binding.toDoListFragment.setOnClickListener {
             val action = PetFragmentDirections.actionPetFragmentToToDoListFragment()
             rootView.findNavController().navigate(action)
@@ -61,25 +43,22 @@ class PetFragment : Fragment() {
             rootView.findNavController().navigate(action)
         }
         viewModel.setWeekYear(SimpleDateFormat("w").format(calendar.time).toInt())
-        setStatus()
+        setStatus(viewModel.petName.value?:"")
 
         dbRef.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                Log.i("FirebaseListener", "Reached inside of firebase listener")
                 val allDBEntries = snapshot.children
 
                 var numOfPetsAdded = 0
 
                 for (allPetsAdded in allDBEntries) {
                     for (singlePetEntry in allPetsAdded.children) {
-                        if (singlePetEntry.child("petName").getValue() != null) {
+                        if (singlePetEntry.child("nameOfPet").getValue() != null) {
                             numOfPetsAdded++
-                            val petName = singlePetEntry.child("petName").getValue().toString()
-                            val petStatus = singlePetEntry.child("petStatus").getValue().toString()
+                            val petName = singlePetEntry.child("nameOfPet").getValue().toString()
+                            val petStatus = singlePetEntry.child("status").getValue().toString()
                             val petImageId = Integer.parseInt(singlePetEntry.child("imageId").getValue().toString())
-                            val currentPet = Pet(petName, petStatus, petImageId)
-                            Log.i("FirebaseListener", "Name: $petName, status: $petStatus, imageId: $petImageId")
-                            setStatus()
+                            setStatus(petName)
                             setImage(petImageId)
                         }
                     }
@@ -113,31 +92,30 @@ class PetFragment : Fragment() {
 //        })
         return rootView
     }
-    fun setStatus() {
+    fun setStatus(name: String) {
         val numOfTasksDone = viewModel.numOfTasksDone.value?:0
         var checkAllDates = true
-        var message = ""
 
         for (task in viewModel.listOfTasks.value?: mutableListOf()) {
             val month = task.monthDue
             val day = task.dayDue
             if(!(viewModel.checkTime(month, day)) && checkAllDates) {
-                binding.petStatusName.text = "${viewModel.petName.value} is:"
+                binding.petStatusName.text = "$name is:"
                 viewModel.setPetStatus(getString(R.string.pet_status_super_sad))
                 checkAllDates = false
             }
         }
-        if (checkAllDates && (viewModel.petName.value ?: "") != "") {
+        if (checkAllDates && name != "") {
             if (numOfTasksDone < 3) {
-                binding.petStatusName.text = "${viewModel.petName.value} is:"
+                binding.petStatusName.text = "$name is:"
                 viewModel.setPetStatus(getString(R.string.pet_status_sad))
             }
             else if(numOfTasksDone in 3..9){
-                binding.petStatusName.text = "${viewModel.petName.value} is:"
+                binding.petStatusName.text = "$name is:"
                 viewModel.setPetStatus(getString(R.string.pet_status_happy))
             }
             else if(numOfTasksDone >= 10) {
-                binding.petStatusName.text = "${viewModel.petName.value} is:"
+                binding.petStatusName.text = "$name is:"
                 viewModel.setPetStatus(getString(R.string.pet_status_super_happy))
             }
         }
