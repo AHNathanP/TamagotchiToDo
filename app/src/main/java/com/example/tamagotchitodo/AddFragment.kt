@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.findNavController
 import com.example.tamagotchitodo.databinding.FragmentAddBinding
@@ -18,6 +19,7 @@ class AddFragment : Fragment() {
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
     lateinit var dbRef : DatabaseReference
+    private val viewModel: StatusViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +53,7 @@ class AddFragment : Fragment() {
             }
         }
         binding.tempDeleteButton.setOnClickListener {                                                //TODO: remove later
+            viewModel.deleteAllTasks()
             dbRef.child("tasks").removeValue()
             rootView.findNavController().navigateUp()
         }

@@ -49,6 +49,13 @@ class StatusViewModel: ViewModel() {
     fun deleteTaskWithoutUpdate(position: Int) {
         listOfTasks.value?.removeAt(position)
     }
+    fun deleteAllTasks() {
+        val size = listOfTasks.value?.size
+        val limit = size?.minus(1) ?: 0
+        for (index in 0 until limit) {
+            deleteTaskWithoutUpdate(index)
+        }
+    }
     fun setTaskKey(index: Int) {
         _taskKey.value = index
     }

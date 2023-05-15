@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.findNavController
 import com.example.tamagotchitodo.databinding.FragmentToDoListBinding
@@ -17,6 +19,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class ToDoListFragment : Fragment() {
@@ -79,6 +83,8 @@ class ToDoListFragment : Fragment() {
                             val taskDayDue = Integer.parseInt(singleTaskEntry.child("dayDue").getValue().toString())
                             val currentTask = Task(taskName, taskMonthDue, taskDayDue)
                             taskList.add(currentTask)
+                            viewModel.addTask(currentTask)
+                            notificationManager(taskMonthDue, taskDayDue)
                             myAdapter.notifyDataSetChanged()
                         }
                     }
@@ -91,5 +97,20 @@ class ToDoListFragment : Fragment() {
         })
 
         return rootView
+    }
+
+    fun notificationManager(monthDue: Int, dayDue: Int) {
+        var month : Int = SimpleDateFormat("L").format(Calendar.getInstance().time).toInt()  //5
+        var day : Int = SimpleDateFormat("d").format(Calendar.getInstance().time).toInt() //15
+        if (monthDue==month && dayDue - day == 3) {
+            var builder = NotificationCompat.Builder(requireContext(), "")
+                .setSmallIcon(R.drawable.app_icon_foreground)
+                .setContentTitle("Task due soon!")
+                .setContentText("You have stuff to do soon!")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            with(NotificationManagerCompat.from(requireContext())) {
+                notify(0, builder.build())
+            }
+        }
     }
 }
