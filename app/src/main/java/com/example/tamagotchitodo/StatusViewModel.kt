@@ -1,5 +1,6 @@
 package com.example.tamagotchitodo
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -50,11 +51,7 @@ class StatusViewModel: ViewModel() {
         listOfTasks.value?.removeAt(position)
     }
     fun deleteAllTasks() {
-        val size = listOfTasks.value?.size
-        val limit = size?.minus(1) ?: 0
-        for (index in 0 until limit) {
-            deleteTaskWithoutUpdate(index)
-        }
+        _listOfTasks.value = mutableListOf()
     }
     fun setTaskKey(index: Int) {
         _taskKey.value = index

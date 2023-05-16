@@ -100,8 +100,8 @@ class ToDoListFragment : Fragment() {
     }
 
     fun notificationManager(monthDue: Int, dayDue: Int) {
-        var month : Int = SimpleDateFormat("L").format(Calendar.getInstance().time).toInt()  //5
-        var day : Int = SimpleDateFormat("d").format(Calendar.getInstance().time).toInt() //15
+        var month : Int = SimpleDateFormat("L").format(Calendar.getInstance().time).toInt()
+        var day : Int = SimpleDateFormat("d").format(Calendar.getInstance().time).toInt()
         if (monthDue==month && dayDue - day == 3) {
             var builder = NotificationCompat.Builder(requireContext(), "")
                 .setSmallIcon(R.drawable.app_icon_foreground)

@@ -6,10 +6,14 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tamagotchitodo.databinding.ListItemLayoutBinding
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class TaskAdapter(val taskList: MutableList<Task>, val viewModel: StatusViewModel): RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
     inner class TaskViewHolder(val binding: ListItemLayoutBinding): RecyclerView.ViewHolder(binding.root) {
         private lateinit var currentTask: Task
+        lateinit var dbRef : DatabaseReference
 
         init {
             binding.root.setOnClickListener { view ->
@@ -23,8 +27,9 @@ class TaskAdapter(val taskList: MutableList<Task>, val viewModel: StatusViewMode
                 binding.root.findNavController().navigate(action)
             }
             binding.checkbox.setOnClickListener {
+                dbRef = Firebase.database.reference
                 viewModel.deleteTask(this.position)
-                val snackbar = Snackbar.make(binding.checkbox,
+                Snackbar.make(binding.checkbox,
                     R.string.snackbar_message, Snackbar.LENGTH_SHORT).show()
                 notifyItemRemoved(this.position)
             }
