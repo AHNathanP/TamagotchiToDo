@@ -32,31 +32,25 @@ class AddFragment : Fragment() {
         binding.addButtonAddFrag.setOnClickListener {
             val checkMonth = binding.newTaskMonth.text.toString()
             val checkDay = binding.newTaskDay.text.toString()
-            if (checkMonth=="" || checkDay=="") {
+            if ((checkMonth=="" || checkDay=="") || !(checkDate(checkMonth.toInt(), checkDay.toInt()))) {
                 Toast.makeText(requireContext(), R.string.toast_message, Toast.LENGTH_SHORT).show()
             }
             else {
                 val taskName = binding.newTaskName.text.toString()
-                val dueDateMonth = binding.newTaskMonth.text.toString().toInt()
-                val dueDateDay = binding.newTaskDay.text.toString().toInt()
-                if (checkDate(dueDateMonth, dueDateDay)) {
+                val dueDateMonth = Integer.parseInt(binding.newTaskMonth.text.toString())
+                val dueDateDay = Integer.parseInt(binding.newTaskDay.text.toString())
 //                    setFragmentResult("REQUESTING_NAME_KEY", bundleOf("NAME_KEY" to taskName))      non-firebase stuff
 //                    setFragmentResult("REQUESTING_MONTH_KEY", bundleOf("MONTH_KEY" to dueDateMonth))
 //                    setFragmentResult("REQUESTING_DAY_KEY", bundleOf("DAY_KEY" to dueDateDay))
-                    val task = Task(taskName, dueDateMonth, dueDateDay)
-                    dbRef.child("tasks").push().setValue(task)
-                    viewModel.addTask(task)
-                    rootView.findNavController().navigateUp()
-                }
-                else {
-                    Toast.makeText(requireContext(), R.string.toast_message, Toast.LENGTH_SHORT).show()
-                }
+                val task = Task(taskName, dueDateMonth, dueDateDay)
+                dbRef.child("tasks").push().setValue(task)
+                viewModel.addTask(task)
+                Toast.makeText(requireContext(), R.string.toast_task_added, Toast.LENGTH_SHORT).show()
             }
         }
         binding.tempDeleteButton.setOnClickListener {                                                //TODO: remove later
             viewModel.deleteAllTasks()
             dbRef.child("tasks").removeValue()
-            rootView.findNavController().navigateUp()
         }
         return rootView
     }

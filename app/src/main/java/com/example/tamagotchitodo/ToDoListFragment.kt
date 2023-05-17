@@ -82,7 +82,7 @@ class ToDoListFragment : Fragment() {
                             val currentTask = Task(taskName, taskMonthDue, taskDayDue)
                             taskList.add(currentTask)
                             viewModel.addTask(currentTask)
-//                            notificationManager(taskMonthDue, taskDayDue)
+//                            notificationManager(taskMonthDue, taskDayDue)                          notifications
                             myAdapter.notifyDataSetChanged()
                         }
                     }
@@ -97,7 +97,7 @@ class ToDoListFragment : Fragment() {
         return rootView
     }
 
-//    fun notificationManager(monthDue: Int, dayDue: Int) {
+//    fun notificationManager(monthDue: Int, dayDue: Int) {                                          notifications
 //        var month : Int = SimpleDateFormat("L").format(Calendar.getInstance().time).toInt()
 //        var day : Int = SimpleDateFormat("d").format(Calendar.getInstance().time).toInt()
 //        if (monthDue==month && dayDue - day == 3) {
@@ -110,5 +110,5 @@ class ToDoListFragment : Fragment() {
 //                notify(0, builder.build())
 //            }
 //        }
-//    }
+//    }                                                                                              notifications
 }
