@@ -11,14 +11,12 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.findNavController
 import com.example.tamagotchitodo.databinding.FragmentToDoListBinding
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import androidx.fragment.app.activityViewModels
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
+import org.w3c.dom.Comment
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -84,7 +82,7 @@ class ToDoListFragment : Fragment() {
                             val currentTask = Task(taskName, taskMonthDue, taskDayDue)
                             taskList.add(currentTask)
                             viewModel.addTask(currentTask)
-                            notificationManager(taskMonthDue, taskDayDue)
+//                            notificationManager(taskMonthDue, taskDayDue)
                             myAdapter.notifyDataSetChanged()
                         }
                     }
@@ -99,18 +97,18 @@ class ToDoListFragment : Fragment() {
         return rootView
     }
 
-    fun notificationManager(monthDue: Int, dayDue: Int) {
-        var month : Int = SimpleDateFormat("L").format(Calendar.getInstance().time).toInt()
-        var day : Int = SimpleDateFormat("d").format(Calendar.getInstance().time).toInt()
-        if (monthDue==month && dayDue - day == 3) {
-            var builder = NotificationCompat.Builder(requireContext(), "")
-                .setSmallIcon(R.drawable.app_icon_foreground)
-                .setContentTitle("Task due soon!")
-                .setContentText("You have stuff to do soon!")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            with(NotificationManagerCompat.from(requireContext())) {
-                notify(0, builder.build())
-            }
-        }
-    }
+//    fun notificationManager(monthDue: Int, dayDue: Int) {
+//        var month : Int = SimpleDateFormat("L").format(Calendar.getInstance().time).toInt()
+//        var day : Int = SimpleDateFormat("d").format(Calendar.getInstance().time).toInt()
+//        if (monthDue==month && dayDue - day == 3) {
+//            var builder = NotificationCompat.Builder(requireContext(), "")
+//                .setSmallIcon(R.drawable.app_icon_foreground)
+//                .setContentTitle("Task due soon!")
+//                .setContentText("You have stuff to do soon!")
+//                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//            with(NotificationManagerCompat.from(requireContext())) {
+//                notify(0, builder.build())
+//            }
+//        }
+//    }
 }
