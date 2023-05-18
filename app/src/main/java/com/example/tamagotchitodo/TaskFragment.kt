@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.snapshots
 import com.google.firebase.ktx.Firebase
 
 class TaskFragment : Fragment() {
@@ -47,7 +48,11 @@ class TaskFragment : Fragment() {
 //                                    val dueDate = "${singleTaskEntry.child("monthDue")}/${singleTaskEntry.child("dayDue")}"
 //                                    if (singleTaskEntry.child("taskName").toString() == args.taskNameArg &&
 //                                            dueDate == args.taskDueDateArg) {
-//                                        let { var query = dbRef.child("tasks").orderByChild("taskName").equalTo(args.taskNameArg) }
+//                                        var key = singleTaskEntry.key
+//                                        Log.i("TaskFragment", "Key is $key")
+//                                        if (key != null) {
+//                                            dbRef.child("tasks").child(key).removeValue()
+//                                        }
 //                                    }
 //                                }
 //                            }
@@ -74,4 +79,5 @@ class TaskFragment : Fragment() {
 
         return rootView
     }
+
 }
