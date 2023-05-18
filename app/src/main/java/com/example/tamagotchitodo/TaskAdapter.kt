@@ -22,16 +22,19 @@ class TaskAdapter(val taskList: MutableList<Task>, val viewModel: StatusViewMode
                 val taskDueMonth = currentTask.monthDue
                 val taskDueDay = currentTask.dayDue
                 val taskDueDate = "$taskDueMonth/$taskDueDay"
+                val taskKey = currentTask.key
                 val action = ToDoListFragmentDirections
-                    .actionToDoListFragmentToTaskFragment(taskName, taskDueDate)
+                    .actionToDoListFragmentToTaskFragment(taskName, taskDueDate, taskKey)
                 binding.root.findNavController().navigate(action)
             }
             binding.checkbox.setOnClickListener {
                 dbRef = Firebase.database.reference
+                val key = currentTask.key
+                dbRef.child("tasks").child(key).removeValue()
                 viewModel.deleteTask(this.position)
                 Snackbar.make(binding.checkbox,
                     R.string.snackbar_message, Snackbar.LENGTH_SHORT).show()
-                notifyItemRemoved(this.position)
+//                notifyItemRemoved(this.position)
             }
         }
 

@@ -34,6 +34,9 @@
         <argument
             android:name="taskDueDateArg"
             app:argType="string" />
+        <argument
+            android:name="keyArg"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/petFragment"

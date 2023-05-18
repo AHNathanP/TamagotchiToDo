@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.tamagotchitodo.databinding.FragmentTaskBinding
@@ -33,48 +34,35 @@ class TaskFragment : Fragment() {
         val args = TaskFragmentArgs.fromBundle(requireArguments())
         binding.taskName.text = args.taskNameArg
         binding.taskDueByDate.text = args.taskDueDateArg
+        val key = args.keyArg
+        var doneOrDeleted = false
 
         binding.deleteButton.setOnClickListener {
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(R.string.alert_title)
-                .setMessage(R.string.alert_message)
-                .setPositiveButton(R.string.alert_positive) { dialog, which ->
-//                    dbRef.addValueEventListener(object: ValueEventListener {
-//                        override fun onDataChange(snapshot: DataSnapshot) {
-//                            val allDBEntries = snapshot.children
-//
-//                            for (allTaskEntries in allDBEntries) {
-//                                for (singleTaskEntry in allTaskEntries.children) {
-//                                    val dueDate = "${singleTaskEntry.child("monthDue")}/${singleTaskEntry.child("dayDue")}"
-//                                    if (singleTaskEntry.child("taskName").toString() == args.taskNameArg &&
-//                                            dueDate == args.taskDueDateArg) {
-//                                        var key = singleTaskEntry.key
-//                                        Log.i("TaskFragment", "Key is $key")
-//                                        if (key != null) {
-//                                            dbRef.child("tasks").child(key).removeValue()
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                        }
-//
-//                        override fun onCancelled(error: DatabaseError) {
-//                            Log.w("TaskFragment", "Failed to read value.", error.toException())
-//                        }
-//                    })
-                    val index = viewModel.taskKey.value?:0
-                    viewModel.deleteTaskWithoutUpdate(index)
-                    rootView.findNavController().navigateUp()
-                }
-                .setNegativeButton(R.string.alert_negative) { dialog, which ->
-                    rootView.findNavController().navigateUp()
-                }
-                .show()
+            if (!doneOrDeleted) {
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(R.string.alert_title)
+                    .setMessage(R.string.alert_message)
+                    .setPositiveButton(R.string.alert_positive) { dialog, which ->
+                        dbRef.child("tasks").child(key).removeValue()
+                        val index = viewModel.taskKey.value?:0
+                        viewModel.deleteTaskWithoutUpdate(index)
+                        Toast.makeText(requireContext(), R.string.toast_task_deleted, Toast.LENGTH_SHORT).show()
+                        doneOrDeleted = true
+                    }
+                    .setNegativeButton(R.string.alert_negative) { dialog, which ->
+                        rootView.findNavController().navigateUp()
+                    }
+                    .show()
+            }
         }
         binding.doneButton.setOnClickListener {
-            val index = viewModel.taskKey.value?:0
-            viewModel.deleteTask(index)
-            rootView.findNavController().navigateUp()
+            if (!doneOrDeleted) {
+                dbRef.child("tasks").child(key).removeValue()
+                val index = viewModel.taskKey.value?:0
+                viewModel.deleteTask(index)
+                Toast.makeText(requireContext(), R.string.snackbar_message, Toast.LENGTH_SHORT).show()
+                doneOrDeleted = true
+            }
         }
 
         return rootView

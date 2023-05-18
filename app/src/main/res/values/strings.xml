@@ -27,6 +27,7 @@
     <string name="edit_due_date_day">DD</string>
     <string name="toast_message">Please enter a valid date</string>
     <string name="toast_task_added">Task added!</string>
+    <string name="toast_task_deleted">Task deleted! Please back out.</string>
     <string name="welcome_message">Welcome to Tamagotchi To Do!</string>
     <string name="snackbar_message">Task finished! Good job!</string>
 

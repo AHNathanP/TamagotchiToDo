@@ -79,10 +79,11 @@ class ToDoListFragment : Fragment() {
                             val taskName = singleTaskEntry.child("taskName").getValue().toString()
                             val taskMonthDue = Integer.parseInt(singleTaskEntry.child("monthDue").getValue().toString())
                             val taskDayDue = Integer.parseInt(singleTaskEntry.child("dayDue").getValue().toString())
-                            val currentTask = Task(taskName, taskMonthDue, taskDayDue)
+                            val key = singleTaskEntry.key.toString()
+                            Log.i("ToDoListFragment", "Key is $key")
+                            val currentTask = Task(taskName, taskMonthDue, taskDayDue, key)
                             taskList.add(currentTask)
                             viewModel.addTask(currentTask)
-//                            notificationManager(taskMonthDue, taskDayDue)                          notifications
                             myAdapter.notifyDataSetChanged()
                         }
                     }
@@ -96,19 +97,4 @@ class ToDoListFragment : Fragment() {
 
         return rootView
     }
-
-//    fun notificationManager(monthDue: Int, dayDue: Int) {                                          notifications
-//        var month : Int = SimpleDateFormat("L").format(Calendar.getInstance().time).toInt()
-//        var day : Int = SimpleDateFormat("d").format(Calendar.getInstance().time).toInt()
-//        if (monthDue==month && dayDue - day == 3) {
-//            var builder = NotificationCompat.Builder(requireContext(), "")
-//                .setSmallIcon(R.drawable.app_icon_foreground)
-//                .setContentTitle("Task due soon!")
-//                .setContentText("You have stuff to do soon!")
-//                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-//            with(NotificationManagerCompat.from(requireContext())) {
-//                notify(0, builder.build())
-//            }
-//        }
-//    }                                                                                              notifications
 }
