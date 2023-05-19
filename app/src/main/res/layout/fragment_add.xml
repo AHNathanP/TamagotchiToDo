@@ -39,7 +39,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBaseline_toBaselineOf="@id/newTaskDueDateOne"
         android:layout_margin="16dp"
-        android:textColor="#FFFFFF"/>
+        android:textColor="#FFFFFF"
+        android:inputType="number"/>
 
     <TextView
         android:id="@+id/slash"
@@ -63,7 +64,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBaseline_toBaselineOf="@id/newTaskDueDateOne"
         android:layout_margin="16dp"
-        android:textColor="#FFFFFF"/>
+        android:textColor="#FFFFFF"
+        android:inputType="number"/>
 
     <Button
         android:id="@+id/addButtonAddFrag"
@@ -79,21 +81,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.95"
         app:layout_constraintHorizontal_bias="0.5"/>
-
-    <Button
-        android:id="@+id/tempDeleteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:textColor="#000000"
-        android:text="Delete all tasks (temp)"
-        app:backgroundTint="#BCFFC3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7"
-        app:layout_constraintHorizontal_bias="0.5"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

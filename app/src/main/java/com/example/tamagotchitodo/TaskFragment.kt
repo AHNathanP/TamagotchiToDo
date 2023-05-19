@@ -11,12 +11,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.tamagotchitodo.databinding.FragmentTaskBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.snapshots
 import com.google.firebase.ktx.Firebase
 
 class TaskFragment : Fragment() {
@@ -60,7 +57,7 @@ class TaskFragment : Fragment() {
                 dbRef.child("tasks").child(key).removeValue()
                 val index = viewModel.taskKey.value?:0
                 viewModel.deleteTask(index)
-                Toast.makeText(requireContext(), R.string.snackbar_message, Toast.LENGTH_SHORT).show()
+                Snackbar.make(binding.doneButton, R.string.snackbar_message, Snackbar.LENGTH_SHORT).show()
                 doneOrDeleted = true
             }
         }

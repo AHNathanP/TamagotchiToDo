@@ -6,19 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.findNavController
 import com.example.tamagotchitodo.databinding.FragmentToDoListBinding
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import androidx.fragment.app.activityViewModels
 import com.google.firebase.database.*
-import com.google.firebase.database.ktx.getValue
-import org.w3c.dom.Comment
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class ToDoListFragment : Fragment() {
@@ -38,21 +31,6 @@ class ToDoListFragment : Fragment() {
         val myAdapter = TaskAdapter(taskList, viewModel)
         binding.recyclerView.adapter = myAdapter
 
-//        var newTaskName = ""                                                                        non-firebase stuff
-//        var newTaskDueMonth = 0
-//        var newTaskDueDay = 0
-//
-//        setFragmentResultListener("REQUESTING_NAME_KEY") { nameKey: String, bundle: Bundle ->
-//            newTaskName = bundle.getString("NAME_KEY")?:""
-//        }
-//        setFragmentResultListener("REQUESTING_MONTH_KEY") { monthKey: String, bundle: Bundle ->
-//            newTaskDueMonth = bundle.getInt("MONTH_KEY")
-//        }
-//        setFragmentResultListener("REQUESTING_DAY_KEY") { dayKey: String, bundle: Bundle ->
-//            newTaskDueDay = bundle.getInt("DAY_KEY")
-//            val newTask = Task(newTaskName, newTaskDueMonth, newTaskDueDay)
-//            viewModel.addTask(newTask)                                                              non-firebase stuff
-//        }
 
         binding.addButton.setOnClickListener {
             val action = ToDoListFragmentDirections.actionToDoListFragmentToAddFragment()
@@ -62,12 +40,10 @@ class ToDoListFragment : Fragment() {
             rootView.findNavController().navigateUp()
         }
 
-//        val taskList = viewModel.listOfTasks.value?: mutableListOf()                                non-firebase stuff
-//        val myAdapter = TaskAdapter(taskList, viewModel)
-//        binding.recyclerView.adapter = myAdapter
 
         dbRef.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+
                 val allDBEntries = snapshot.children
                 var numOfTasksAdded = 0
 
@@ -80,7 +56,6 @@ class ToDoListFragment : Fragment() {
                             val taskMonthDue = Integer.parseInt(singleTaskEntry.child("monthDue").getValue().toString())
                             val taskDayDue = Integer.parseInt(singleTaskEntry.child("dayDue").getValue().toString())
                             val key = singleTaskEntry.key.toString()
-                            Log.i("ToDoListFragment", "Key is $key")
                             val currentTask = Task(taskName, taskMonthDue, taskDayDue, key)
                             taskList.add(currentTask)
                             viewModel.addTask(currentTask)

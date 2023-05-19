@@ -29,6 +29,7 @@ class StatusViewModel: ViewModel() {
     private var _petStatus = MutableLiveData("")
     val petStatus: LiveData<String>
         get() = _petStatus
+    var taskRemoved = false
 
     fun updateTasksDone(taskDone: Int) {
         val currentTasksDone = numOfTasksDone.value?:0

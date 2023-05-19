@@ -6,10 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.setFragmentResult
-import androidx.navigation.findNavController
 import com.example.tamagotchitodo.databinding.FragmentAddBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
@@ -39,18 +36,11 @@ class AddFragment : Fragment() {
                 val taskName = binding.newTaskName.text.toString()
                 val dueDateMonth = Integer.parseInt(binding.newTaskMonth.text.toString())
                 val dueDateDay = Integer.parseInt(binding.newTaskDay.text.toString())
-//                    setFragmentResult("REQUESTING_NAME_KEY", bundleOf("NAME_KEY" to taskName))      non-firebase stuff
-//                    setFragmentResult("REQUESTING_MONTH_KEY", bundleOf("MONTH_KEY" to dueDateMonth))
-//                    setFragmentResult("REQUESTING_DAY_KEY", bundleOf("DAY_KEY" to dueDateDay))
                 val task = Task(taskName, dueDateMonth, dueDateDay)
                 dbRef.child("tasks").push().setValue(task)
                 viewModel.addTask(task)
                 Toast.makeText(requireContext(), R.string.toast_task_added, Toast.LENGTH_SHORT).show()
             }
-        }
-        binding.tempDeleteButton.setOnClickListener {                                                //TODO: remove later
-            viewModel.deleteAllTasks()
-            dbRef.child("tasks").removeValue()
         }
         return rootView
     }
