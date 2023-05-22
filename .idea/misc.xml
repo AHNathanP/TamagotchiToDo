@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/philipsn24/AndroidStudioProjects/TamagotchiToDo/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2145" />
+        <entry key="..\:/Users/philipsn24/AndroidStudioProjects/TamagotchiToDo/app/src/main/res/drawable/app_icon_foreground.xml" value="0.2145" />
+        <entry key="..\:/Users/philipsn24/AndroidStudioProjects/TamagotchiToDo/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2145" />
+        <entry key="..\:/Users/philipsn24/AndroidStudioProjects/TamagotchiToDo/app/src/main/res/drawable/ic_pet_placeholder.xml" value="0.2145" />
         <entry key="..\:/Users/philipsn24/AndroidStudioProjects/TamagotchiToDo/app/src/main/res/layout/activity_main.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/philipsn24/AndroidStudioProjects/TamagotchiToDo/app/src/main/res/layout/fragment_add.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/philipsn24/AndroidStudioProjects/TamagotchiToDo/app/src/main/res/layout/fragment_choose_pet.xml" value="0.27291666666666664" />
@@ -10,6 +14,8 @@
         <entry key="..\:/Users/philipsn24/AndroidStudioProjects/TamagotchiToDo/app/src/main/res/layout/fragment_task.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/philipsn24/AndroidStudioProjects/TamagotchiToDo/app/src/main/res/layout/fragment_to_do_list.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/philipsn24/AndroidStudioProjects/TamagotchiToDo/app/src/main/res/layout/list_item_layout.xml" value="0.271875" />
+        <entry key="..\:/Users/philipsn24/AndroidStudioProjects/TamagotchiToDo/app/src/main/res/mipmap-anydpi-v26/app_icon.xml" value="0.2145" />
+        <entry key="..\:/Users/philipsn24/AndroidStudioProjects/TamagotchiToDo/app/src/main/res/mipmap-anydpi-v26/custom_app_icon.xml" value="0.2145" />
       </map>
     </option>
   </component>

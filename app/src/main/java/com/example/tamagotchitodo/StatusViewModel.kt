@@ -35,24 +35,8 @@ class StatusViewModel: ViewModel() {
         val currentTasksDone = numOfTasksDone.value?:0
         _numOfTasksDone.value = currentTasksDone + taskDone
     }
-    fun setPetImageKey(key: Int) {
-        _petImageKey.value = key
-    }
-    fun setPetName(name: String) {
-        _petName.value = name
-    }
     fun addTask(task: Task) {
         _listOfTasks.value?.add(task)
-    }
-    fun deleteTask(position: Int) {
-       listOfTasks.value?.removeAt(position)
-        updateTasksDone(1)
-    }
-    fun deleteTaskWithoutUpdate(position: Int) {
-        listOfTasks.value?.removeAt(position)
-    }
-    fun deleteAllTasks() {
-        _listOfTasks.value = mutableListOf()
     }
     fun setTaskKey(index: Int) {
         _taskKey.value = index

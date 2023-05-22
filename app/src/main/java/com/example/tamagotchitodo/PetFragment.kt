@@ -59,6 +59,7 @@ class PetFragment : Fragment() {
                             val key = singlePetEntry.key.toString()
                             setStatus(petName, key)
                             setImage(petImageId)
+                            dbRef.child("numOfTasksDone").setValue(0)
                         }
                     }
                 }
@@ -74,14 +75,18 @@ class PetFragment : Fragment() {
     fun setStatus(name: String, key: String) {
         val numOfTasksDone = viewModel.numOfTasksDone.value?:0
         var checkAllDates = true
+        binding.petStatusName.text = "$name is:"
+        binding.petStatusFeeling.text = dbRef.child("pets").child(key).child("status").toString()
+
 
         for (task in viewModel.listOfTasks.value?: mutableListOf()) {
+            Log.i("PetFragment", "Task name: ${task.taskName}")
             val month = task.monthDue
             val day = task.dayDue
             if(!(viewModel.checkTime(month, day)) && checkAllDates) {
                 binding.petStatusName.text = "$name is:"
                 viewModel.setPetStatus(getString(R.string.pet_status_super_sad))
-                //dbRef.child("pets").child(key).child("status").setValue("super sad!")
+                dbRef.child("pets").child(key).child("status").setValue("super sad!")
                 checkAllDates = false
             }
         }
@@ -89,20 +94,19 @@ class PetFragment : Fragment() {
             if (numOfTasksDone < 3) {
                 binding.petStatusName.text = "$name is:"
                 viewModel.setPetStatus(getString(R.string.pet_status_sad))
-                //dbRef.child("pets").child(key).child("status").setValue("sad...")
+                dbRef.child("pets").child(key).child("status").setValue("sad...")
             }
             else if(numOfTasksDone in 3..9){
                 binding.petStatusName.text = "$name is:"
                 viewModel.setPetStatus(getString(R.string.pet_status_happy))
-                //dbRef.child("pets").child(key).child("status").setValue("happy!")
+                dbRef.child("pets").child(key).child("status").setValue("happy!")
             }
             else if(numOfTasksDone >= 10) {
                 binding.petStatusName.text = "$name is:"
                 viewModel.setPetStatus(getString(R.string.pet_status_super_happy))
-                //dbRef.child("pets").child(key).child("status").setValue("super happy!!")
+                dbRef.child("pets").child(key).child("status").setValue("super happy!!")
             }
         }
-        binding.petStatusFeeling.text = viewModel.petStatus.value?:""
     }
     fun setImage(imageKey: Int) {
         if (imageKey == 1) {

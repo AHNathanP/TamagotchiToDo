@@ -41,8 +41,6 @@ class TaskFragment : Fragment() {
                     .setMessage(R.string.alert_message)
                     .setPositiveButton(R.string.alert_positive) { dialog, which ->
                         dbRef.child("tasks").child(key).removeValue()
-                        val index = viewModel.taskKey.value?:0
-                        viewModel.deleteTaskWithoutUpdate(index)
                         Toast.makeText(requireContext(), R.string.toast_task_deleted, Toast.LENGTH_SHORT).show()
                         doneOrDeleted = true
                     }
@@ -55,8 +53,7 @@ class TaskFragment : Fragment() {
         binding.doneButton.setOnClickListener {
             if (!doneOrDeleted) {
                 dbRef.child("tasks").child(key).removeValue()
-                val index = viewModel.taskKey.value?:0
-                viewModel.deleteTask(index)
+                viewModel.updateTasksDone(1)
                 Snackbar.make(binding.doneButton, R.string.snackbar_message, Snackbar.LENGTH_SHORT).show()
                 doneOrDeleted = true
             }
