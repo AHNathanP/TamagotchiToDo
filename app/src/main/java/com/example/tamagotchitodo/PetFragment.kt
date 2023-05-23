@@ -28,9 +28,9 @@ class PetFragment : Fragment() {
         val rootView = binding.root
         dbRef = Firebase.database.reference
 
-        var calendar: Calendar = Calendar.getInstance()
-        var simpleDateFormat: SimpleDateFormat = SimpleDateFormat("EEE, LLLL dd, KK:mm aaa")
-        var dateTime : String = simpleDateFormat.format(calendar.time).toString()
+        val calendar: Calendar = Calendar.getInstance()
+        val simpleDateFormat = SimpleDateFormat("EEE, LLLL dd, KK:mm aaa")
+        val dateTime : String = simpleDateFormat.format(calendar.time).toString()
         binding.dateTimeTwo.text = dateTime
 
         binding.toDoListFragment.setOnClickListener {
@@ -73,8 +73,9 @@ class PetFragment : Fragment() {
         return rootView
     }
     fun setStatus(name: String, key: String, status: String) {
+        val stat = dbRef.child("pets").child(key).child("status")
+        Log.i("PetFragment", "stat is $stat and status is $status")
         val tasks = viewModel.numOfTasksDone.value?:0
-        Log.i("PetFragment", "numOfTasksDone is $tasks")
         var checkAllDates = true
 
         for (task in viewModel.listOfTasks.value?: mutableListOf()) {
