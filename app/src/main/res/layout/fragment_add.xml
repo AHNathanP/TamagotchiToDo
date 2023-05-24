@@ -4,82 +4,83 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddFragment"
-    android:background="#4765FF">
+    android:background="#788DFF"
+    tools:context=".AddFragment">
 
     <EditText
         android:id="@+id/newTaskName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:hint="@string/new_task_name"
+        android:textColor="#FFFFFF"
         android:textSize="32sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="16dp"
-        android:textColor="#FFFFFF"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/newTaskDueDateOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/task_due_by"
-        android:textSize="32sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/newTaskName"
         android:layout_margin="16dp"
-        android:textColor="#FFFFFF"/>
+        android:text="@string/task_due_by"
+        android:textColor="#061D8F"
+        android:textSize="32sp"
+        app:fontFamily="@font/acme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/newTaskName" />
 
     <EditText
         android:id="@+id/newTaskMonth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/edit_due_date_month"
-        android:textSize="32sp"
-        app:layout_constraintStart_toEndOf="@id/newTaskDueDateOne"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBaseline_toBaselineOf="@id/newTaskDueDateOne"
         android:layout_margin="16dp"
+        android:hint="@string/edit_due_date_month"
+        android:inputType="number"
         android:textColor="#FFFFFF"
-        android:inputType="number"/>
+        android:textSize="32sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/newTaskDueDateOne"
+        app:layout_constraintStart_toEndOf="@id/newTaskDueDateOne"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/slash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/due_date_slash"
-        android:textSize="32sp"
-        app:layout_constraintStart_toEndOf="@id/newTaskMonth"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBaseline_toBaselineOf="@id/newTaskDueDateOne"
         android:layout_margin="16dp"
-        android:textColor="#FFFFFF"/>
+        android:hint="@string/due_date_slash"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/newTaskDueDateOne"
+        app:layout_constraintStart_toEndOf="@id/newTaskMonth"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/newTaskDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/edit_due_date_day"
-        android:textSize="32sp"
-        app:layout_constraintStart_toEndOf="@id/slash"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBaseline_toBaselineOf="@id/newTaskDueDateOne"
         android:layout_margin="16dp"
+        android:hint="@string/edit_due_date_day"
+        android:inputType="number"
         android:textColor="#FFFFFF"
-        android:inputType="number"/>
+        android:textSize="32sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/newTaskDueDateOne"
+        app:layout_constraintStart_toEndOf="@id/slash"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/addButtonAddFrag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        android:textColor="#000000"
         android:text="@string/add_button_text"
+        android:textColor="#000000"
         app:backgroundTint="#BCFFC3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95"
-        app:layout_constraintHorizontal_bias="0.5"/>
+        app:layout_constraintVertical_bias="0.95" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

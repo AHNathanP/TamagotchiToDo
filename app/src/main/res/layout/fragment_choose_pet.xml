@@ -13,10 +13,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="@string/pet_name_intro"
+        android:textColor="#FFFFFF"
         android:textSize="30sp"
+        app:fontFamily="@font/acme"
         app:layout_constraintBaseline_toBaselineOf="@+id/pet_name_edit"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textColor="#FFFFFF"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/pet_name_edit"

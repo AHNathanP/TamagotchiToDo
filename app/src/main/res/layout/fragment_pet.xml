@@ -4,34 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PetFragment"
-    android:background="#3B7FD1">
+    android:background="#89BDFB"
+    tools:context=".PetFragment">
 
     <TextView
         android:id="@+id/welcome_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:gravity="center"
-        android:textColor="#FFFFFF"
+        android:text="@string/welcome_message"
+        android:textColor="#0B5C42"
         android:textSize="25sp"
+        app:fontFamily="@font/acme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/welcome_message"
-        android:layout_margin="16dp"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/petStatusName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:textColor="#FFFFFF"
+        android:textColor="#1B00FF"
         android:textSize="30sp"
+        app:fontFamily="@font/bevan"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/petStatusFeeling"
         app:layout_constraintHorizontal_bias="0.99"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0.08"
         tools:text="Your pet is:" />
 
@@ -40,11 +42,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:textColor="#FFFFFF"
+        android:textColor="#1B00FF"
         android:textSize="30sp"
+        app:fontFamily="@font/bevan"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintHorizontal_bias="0.885"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.08"
@@ -55,21 +58,21 @@
         android:id="@+id/petImage"
         android:layout_width="160dp"
         android:layout_height="160dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/ic_pet_placeholder"
-        app:layout_constraintVertical_bias="0.4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:scaleType="centerCrop"/>
+        app:layout_constraintVertical_bias="0.4" />
 
     <Button
         android:id="@+id/to_do_list_fragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#708150"
-        android:textColor="#000000"
         android:text="@string/to_tasks_button"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,24 +82,27 @@
         android:id="@+id/dateTimeOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         android:text="@string/date_time_message"
+        android:textColor="#1B00FF"
         android:textSize="22sp"
-        android:textColor="#FFFFFF"
+        app:fontFamily="@font/share_tech"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="20dp"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/dateTimeTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Mon, January 1 12:00 AM"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="#1B00FF"
         android:textSize="22sp"
-        android:textColor="#FFFFFF"
+        app:fontFamily="@font/share_tech"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toEndOf="@id/dateTimeOne"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"/>
+        tools:text="Mon, January 1 12:00 AM" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

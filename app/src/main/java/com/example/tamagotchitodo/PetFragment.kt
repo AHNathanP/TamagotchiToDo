@@ -57,7 +57,7 @@ class PetFragment : Fragment() {
                             val petStatus = singlePetEntry.child("status").getValue().toString()
                             val petImageId = Integer.parseInt(singlePetEntry.child("imageId").getValue().toString())
                             val key = singlePetEntry.key.toString()
-                            dbRef.child("numOfTasksDone").setValue(0)
+
                             setStatus(petName, key, petStatus)
                             setImage(petImageId)
                         }
@@ -73,8 +73,6 @@ class PetFragment : Fragment() {
         return rootView
     }
     fun setStatus(name: String, key: String, status: String) {
-        val stat = dbRef.child("pets").child(key).child("status")
-        Log.i("PetFragment", "stat is $stat and status is $status")
         val tasks = viewModel.numOfTasksDone.value?:0
         var checkAllDates = true
 

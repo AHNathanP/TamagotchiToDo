@@ -11,38 +11,41 @@
         android:id="@+id/taskName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
+        android:layout_margin="20dp"
+        android:textSize="35sp"
+        app:fontFamily="@font/gafata"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Task name"
-        android:layout_margin="20dp"/>
+        tools:text="Task name" />
 
     <TextView
         android:id="@+id/taskDueByText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/task_due_by"
-        android:textSize="25sp"
+        android:textSize="30sp"
+        app:fontFamily="@font/gafata"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintVertical_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2" />
 
     <TextView
         android:id="@+id/taskDueByDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="MM/DD"
-        android:textSize="25sp"
+        android:textSize="30sp"
+        app:fontFamily="@font/gafata"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.7"
-        app:layout_constraintVertical_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2"
+        tools:text="MM/DD" />
 
     <Button
         android:id="@+id/deleteButton"
@@ -62,14 +65,14 @@
         android:id="@+id/doneButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#007E16"
         android:text="@string/done_button"
-        android:backgroundTint="#991D9308"
         android:textColor="#FFFFFF"
-        app:layout_constraintHorizontal_bias="0.7"
-        app:layout_constraintVertical_bias="0.7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.7"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/taskDueByDate" />
+        app:layout_constraintTop_toBottomOf="@id/taskDueByDate"
+        app:layout_constraintVertical_bias="0.7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
