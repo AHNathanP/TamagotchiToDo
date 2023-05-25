@@ -10,7 +10,6 @@ import androidx.navigation.findNavController
 import com.example.tamagotchitodo.databinding.FragmentToDoListBinding
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import androidx.fragment.app.activityViewModels
 import com.google.firebase.database.*
 
 
@@ -19,7 +18,6 @@ class ToDoListFragment : Fragment() {
     private val binding get() = _binding!!
     lateinit var dbRef : DatabaseReference
     lateinit var taskList: MutableList<Task>
-    private val viewModel: StatusViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -28,7 +26,7 @@ class ToDoListFragment : Fragment() {
         dbRef = Firebase.database.reference
 
         taskList = mutableListOf()
-        val myAdapter = TaskAdapter(taskList, viewModel)
+        val myAdapter = TaskAdapter(taskList)
         binding.recyclerView.adapter = myAdapter
 
 
@@ -58,7 +56,6 @@ class ToDoListFragment : Fragment() {
                             val key = singleTaskEntry.key.toString()
                             val currentTask = Task(taskName, taskMonthDue, taskDayDue, key)
                             taskList.add(currentTask)
-                            viewModel.addTask(currentTask)
                             myAdapter.notifyDataSetChanged()
                         }
                     }

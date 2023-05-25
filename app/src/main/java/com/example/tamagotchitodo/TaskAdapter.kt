@@ -7,13 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tamagotchitodo.databinding.ListItemLayoutBinding
 import com.google.firebase.database.DatabaseReference
 
-class TaskAdapter(val taskList: MutableList<Task>, val viewModel: StatusViewModel): RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+class TaskAdapter(val taskList: MutableList<Task>): RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
     inner class TaskViewHolder(val binding: ListItemLayoutBinding): RecyclerView.ViewHolder(binding.root) {
         private lateinit var currentTask: Task
 
         init {
             binding.root.setOnClickListener { view ->
-                viewModel.setTaskKey(this.position)
                 val taskName = currentTask.taskName
                 val taskDueMonth = currentTask.monthDue
                 val taskDueDay = currentTask.dayDue

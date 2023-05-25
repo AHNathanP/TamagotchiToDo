@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.activityViewModels
 import com.example.tamagotchitodo.databinding.FragmentAddBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
@@ -16,7 +15,6 @@ class AddFragment : Fragment() {
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
     lateinit var dbRef : DatabaseReference
-    private val viewModel: StatusViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,7 +36,6 @@ class AddFragment : Fragment() {
                 val dueDateDay = Integer.parseInt(binding.newTaskDay.text.toString())
                 val task = Task(taskName, dueDateMonth, dueDateDay)
                 dbRef.child("tasks").push().setValue(task)
-                viewModel.addTask(task)
                 Toast.makeText(requireContext(), R.string.toast_task_added, Toast.LENGTH_SHORT).show()
             }
         }

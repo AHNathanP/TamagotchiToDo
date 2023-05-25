@@ -41,7 +41,7 @@ class PetFragment : Fragment() {
             val action = PetFragmentDirections.actionPetFragmentToChoosePetFragment()
             rootView.findNavController().navigate(action)
         }
-        viewModel.setWeekYear(SimpleDateFormat("w").format(calendar.time).toInt())
+        viewModel.updateWeekYear(SimpleDateFormat("w").format(calendar.time).toInt())
 
         dbRef.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -81,7 +81,6 @@ class PetFragment : Fragment() {
             val day = task.dayDue
             if(!(viewModel.checkTime(month, day)) && checkAllDates) {
                 binding.petStatusName.text = "$name is:"
-                viewModel.setPetStatus(getString(R.string.pet_status_super_sad))
                 dbRef.child("pets").child(key).child("status").setValue("super sad!")
                 checkAllDates = false
             }
@@ -89,17 +88,14 @@ class PetFragment : Fragment() {
         if (checkAllDates && name != "") {
             if (tasks < 3) {
                 binding.petStatusName.text = "$name is:"
-                viewModel.setPetStatus(getString(R.string.pet_status_sad))
                 dbRef.child("pets").child(key).child("status").setValue("sad...")
             }
             else if(tasks in 3..9){
                 binding.petStatusName.text = "$name is:"
-                viewModel.setPetStatus(getString(R.string.pet_status_happy))
                 dbRef.child("pets").child(key).child("status").setValue("happy!")
             }
             else if(tasks >= 10) {
                 binding.petStatusName.text = "$name is:"
-                viewModel.setPetStatus(getString(R.string.pet_status_super_happy))
                 dbRef.child("pets").child(key).child("status").setValue("super happy!!")
             }
         }
