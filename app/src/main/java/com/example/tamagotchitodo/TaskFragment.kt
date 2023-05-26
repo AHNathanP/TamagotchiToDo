@@ -31,7 +31,9 @@ class TaskFragment : Fragment() {
         val args = TaskFragmentArgs.fromBundle(requireArguments())
         binding.taskName.text = args.taskNameArg
         binding.taskDueByDate.text = args.taskDueDateArg
-        val key = args.keyArg
+        val taskKey = args.keyArg
+        val petKey = args.petKeyArg
+        val tasksDone = args.tasksDoneArg
         var doneOrDeleted = false
 
         binding.deleteButton.setOnClickListener {
@@ -40,7 +42,7 @@ class TaskFragment : Fragment() {
                     .setTitle(R.string.alert_title)
                     .setMessage(R.string.alert_message)
                     .setPositiveButton(R.string.alert_positive) { dialog, which ->
-                        dbRef.child("tasks").child(key).removeValue()
+                        dbRef.child("tasks").child(taskKey).removeValue()
                         Toast.makeText(requireContext(), R.string.toast_task_deleted, Toast.LENGTH_SHORT).show()
                         doneOrDeleted = true
                     }
@@ -52,7 +54,8 @@ class TaskFragment : Fragment() {
         }
         binding.doneButton.setOnClickListener {
             if (!doneOrDeleted) {
-                dbRef.child("tasks").child(key).removeValue()
+                dbRef.child("tasks").child(taskKey).removeValue()
+                dbRef.child("pets").child(petKey).child("numOfTasksDone").setValue(tasksDone + 1)
                 viewModel.updateTasksDone(1)
                 Snackbar.make(binding.doneButton, R.string.snackbar_message, Snackbar.LENGTH_SHORT).show()
                 doneOrDeleted = true

@@ -26,19 +26,19 @@ class ChoosePetFragment : Fragment() {
 
         binding.petChoiceOne.setOnClickListener {
             val petName = binding.petNameEdit.text.toString()
-            val pet = Pet(petName, getString(R.string.pet_status_sad), 1)
+            val pet = Pet(petName, getString(R.string.pet_status_sad), 1, 0)
             dbRef.child("pets").push().setValue(pet)
             rootView.findNavController().navigateUp()
         }
         binding.petChoiceTwo.setOnClickListener {
             val petName = binding.petNameEdit.text.toString()
-            val pet = Pet(petName, getString(R.string.pet_status_sad), 2)
+            val pet = Pet(petName, getString(R.string.pet_status_sad), 2, 0)
             dbRef.child("pets").push().setValue(pet)
             rootView.findNavController().navigateUp()
         }
         binding.petChoiceThree.setOnClickListener {
             val petName = binding.petNameEdit.text.toString()
-            val pet = Pet(petName, getString(R.string.pet_status_sad), 3)
+            val pet = Pet(petName, getString(R.string.pet_status_sad), 3, 0)
             dbRef.child("pets").push().setValue(pet)
             rootView.findNavController().navigateUp()
         }

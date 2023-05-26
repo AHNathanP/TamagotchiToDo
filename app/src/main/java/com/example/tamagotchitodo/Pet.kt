@@ -1,3 +1,4 @@
 package com.example.tamagotchitodo
 
-class Pet(var nameOfPet: String = "", var status: String = "", var imageId: Int = 0)
+class Pet(var nameOfPet: String = "", var status: String = "", var imageId: Int = 0,
+          var numOfTasksDone: Int = 0)

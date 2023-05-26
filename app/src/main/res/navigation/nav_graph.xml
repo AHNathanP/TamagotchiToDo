@@ -16,6 +16,12 @@
         <action
             android:id="@+id/action_toDoListFragment_to_taskFragment"
             app:destination="@id/taskFragment" />
+        <argument
+            android:name="petKeyArg"
+            app:argType="string" />
+        <argument
+            android:name="tasksDoneArg"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
@@ -37,6 +43,12 @@
         <argument
             android:name="keyArg"
             app:argType="string" />
+        <argument
+            android:name="petKeyArg"
+            app:argType="string" />
+        <argument
+            android:name="tasksDoneArg"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/petFragment"

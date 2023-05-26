@@ -27,6 +27,8 @@ class PetFragment : Fragment() {
         _binding = FragmentPetBinding.inflate(inflater, container, false)
         val rootView = binding.root
         dbRef = Firebase.database.reference
+        var key = ""
+        var tasksDone = 0
 
         val calendar: Calendar = Calendar.getInstance()
         val simpleDateFormat = SimpleDateFormat("EEE, LLLL dd, KK:mm aaa")
@@ -34,7 +36,7 @@ class PetFragment : Fragment() {
         binding.dateTimeTwo.text = dateTime
 
         binding.toDoListFragment.setOnClickListener {
-            val action = PetFragmentDirections.actionPetFragmentToToDoListFragment()
+            val action = PetFragmentDirections.actionPetFragmentToToDoListFragment(key, tasksDone)
             rootView.findNavController().navigate(action)
         }
         binding.petImage.setOnClickListener {
@@ -56,9 +58,10 @@ class PetFragment : Fragment() {
                             val petName = singlePetEntry.child("nameOfPet").getValue().toString()
                             val petStatus = singlePetEntry.child("status").getValue().toString()
                             val petImageId = Integer.parseInt(singlePetEntry.child("imageId").getValue().toString())
-                            val key = singlePetEntry.key.toString()
+                            tasksDone = Integer.parseInt(singlePetEntry.child("numOfTasksDone").getValue().toString())
+                            key = singlePetEntry.key.toString()
 
-                            setStatus(petName, key, petStatus)
+                            setStatus(petName, key, petStatus, tasksDone)
                             setImage(petImageId)
                         }
                     }
@@ -72,8 +75,8 @@ class PetFragment : Fragment() {
 
         return rootView
     }
-    fun setStatus(name: String, key: String, status: String) {
-        val tasks = viewModel.numOfTasksDone.value?:0
+    fun setStatus(name: String, key: String, status: String, tasksDone: Int) {
+//        val tasks = viewModel.numOfTasksDone.value?:0
         var checkAllDates = true
 
         for (task in viewModel.listOfTasks.value?: mutableListOf()) {
@@ -86,15 +89,15 @@ class PetFragment : Fragment() {
             }
         }
         if (checkAllDates && name != "") {
-            if (tasks < 3) {
+            if (tasksDone < 3) {
                 binding.petStatusName.text = "$name is:"
                 dbRef.child("pets").child(key).child("status").setValue("sad...")
             }
-            else if(tasks in 3..9){
+            else if(tasksDone in 3..9){
                 binding.petStatusName.text = "$name is:"
                 dbRef.child("pets").child(key).child("status").setValue("happy!")
             }
-            else if(tasks >= 10) {
+            else {
                 binding.petStatusName.text = "$name is:"
                 dbRef.child("pets").child(key).child("status").setValue("super happy!!")
             }
