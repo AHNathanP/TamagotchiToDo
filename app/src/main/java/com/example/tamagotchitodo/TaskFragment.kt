@@ -20,7 +20,7 @@ class TaskFragment : Fragment() {
     private var _binding: FragmentTaskBinding? = null
     private val binding get() = _binding!!
     lateinit var dbRef : DatabaseReference
-    private val viewModel: StatusViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,8 +33,9 @@ class TaskFragment : Fragment() {
         binding.taskDueByDate.text = args.taskDueDateArg
         val taskKey = args.keyArg
         val petKey = args.petKeyArg
-        val tasksDone = args.tasksDoneArg
+        var tasksDone = args.tasksDoneArg
         var doneOrDeleted = false
+        Log.i("TaskFragment before click listener", "tasksDone is $tasksDone")
 
         binding.deleteButton.setOnClickListener {
             if (!doneOrDeleted) {
@@ -56,9 +57,10 @@ class TaskFragment : Fragment() {
             if (!doneOrDeleted) {
                 dbRef.child("tasks").child(taskKey).removeValue()
                 dbRef.child("pets").child(petKey).child("numOfTasksDone").setValue(tasksDone + 1)
-                viewModel.updateTasksDone(1)
+                tasksDone++
                 Snackbar.make(binding.doneButton, R.string.snackbar_message, Snackbar.LENGTH_SHORT).show()
                 doneOrDeleted = true
+                Log.i("TaskFragment in click listener", "tasksDone is $tasksDone")
             }
         }
 

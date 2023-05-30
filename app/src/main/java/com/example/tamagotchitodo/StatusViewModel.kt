@@ -15,10 +15,6 @@ class StatusViewModel: ViewModel() {
         get() = _listOfTasks
     var weekYear = 0
 
-    fun updateTasksDone(taskDone: Int) {
-        val currentTasksDone = numOfTasksDone.value?:0
-        _numOfTasksDone.value = currentTasksDone + taskDone
-    }
     fun updateWeekYear(newWeekYear: Int) {
         if (newWeekYear > weekYear) {
             weekYear = newWeekYear

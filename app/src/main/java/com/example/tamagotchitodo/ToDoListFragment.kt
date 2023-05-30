@@ -27,6 +27,7 @@ class ToDoListFragment : Fragment() {
         val args = ToDoListFragmentArgs.fromBundle(requireArguments())
         val petKey = args.petKeyArg
         val tasksDone = args.tasksDoneArg
+        Log.i("ToDoListFragment", "tasksDone is $tasksDone")
 
         taskList = mutableListOf()
         val myAdapter = TaskAdapter(taskList, petKey, tasksDone)

@@ -36,6 +36,7 @@ class PetFragment : Fragment() {
         binding.dateTimeTwo.text = dateTime
 
         binding.toDoListFragment.setOnClickListener {
+            Log.i("PetFragment inside button click listener", "tasksDone is $tasksDone")
             val action = PetFragmentDirections.actionPetFragmentToToDoListFragment(key, tasksDone)
             rootView.findNavController().navigate(action)
         }
@@ -60,6 +61,7 @@ class PetFragment : Fragment() {
                             val petImageId = Integer.parseInt(singlePetEntry.child("imageId").getValue().toString())
                             tasksDone = Integer.parseInt(singlePetEntry.child("numOfTasksDone").getValue().toString())
                             key = singlePetEntry.key.toString()
+                            Log.i("PetFragment inside value event listener", "tasksDone is $tasksDone")
 
                             setStatus(petName, key, petStatus, tasksDone)
                             setImage(petImageId)

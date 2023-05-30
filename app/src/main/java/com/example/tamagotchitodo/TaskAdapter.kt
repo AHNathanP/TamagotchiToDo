@@ -1,5 +1,6 @@
 package com.example.tamagotchitodo
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -21,6 +22,7 @@ class TaskAdapter(val taskList: MutableList<Task>, val petKey: String, val tasks
                 val action = ToDoListFragmentDirections
                     .actionToDoListFragmentToTaskFragment(taskName, taskDueDate,
                         taskKey, petKey, tasksDone)
+                Log.i("TaskAdapter", "tasksDone is $tasksDone")
                 binding.root.findNavController().navigate(action)
             }
         }
