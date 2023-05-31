@@ -26,7 +26,7 @@ class ToDoListFragment : Fragment() {
         dbRef = Firebase.database.reference
         val args = ToDoListFragmentArgs.fromBundle(requireArguments())
         val petKey = args.petKeyArg
-        val tasksDone = args.tasksDoneArg
+        var tasksDone = args.tasksDoneArg
         Log.i("ToDoListFragment", "tasksDone is $tasksDone")
 
         taskList = mutableListOf()

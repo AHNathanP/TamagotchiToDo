@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tamagotchitodo.databinding.ListItemLayoutBinding
-import com.google.firebase.database.DatabaseReference
 
 class TaskAdapter(val taskList: MutableList<Task>, val petKey: String, val tasksDone: Int): RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
     inner class TaskViewHolder(val binding: ListItemLayoutBinding): RecyclerView.ViewHolder(binding.root) {

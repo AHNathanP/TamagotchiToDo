@@ -21,7 +21,6 @@ class TaskFragment : Fragment() {
     private val binding get() = _binding!!
     lateinit var dbRef : DatabaseReference
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
@@ -57,7 +56,6 @@ class TaskFragment : Fragment() {
             if (!doneOrDeleted) {
                 dbRef.child("tasks").child(taskKey).removeValue()
                 dbRef.child("pets").child(petKey).child("numOfTasksDone").setValue(tasksDone + 1)
-                tasksDone++
                 Snackbar.make(binding.doneButton, R.string.snackbar_message, Snackbar.LENGTH_SHORT).show()
                 doneOrDeleted = true
                 Log.i("TaskFragment in click listener", "tasksDone is $tasksDone")
