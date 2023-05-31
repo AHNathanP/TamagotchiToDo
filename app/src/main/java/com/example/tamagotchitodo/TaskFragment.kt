@@ -12,7 +12,10 @@ import androidx.navigation.findNavController
 import com.example.tamagotchitodo.databinding.FragmentTaskBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -64,5 +67,4 @@ class TaskFragment : Fragment() {
 
         return rootView
     }
-
 }

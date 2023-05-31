@@ -99,10 +99,6 @@ class PetFragment : Fragment() {
                 binding.petStatusName.text = "$name is:"
                 dbRef.child("pets").child(key).child("status").setValue("happy!")
             }
-            else {
-                binding.petStatusName.text = "$name is:"
-                dbRef.child("pets").child(key).child("status").setValue("super happy!!")
-            }
         }
         binding.petStatusFeeling.text = status
     }
