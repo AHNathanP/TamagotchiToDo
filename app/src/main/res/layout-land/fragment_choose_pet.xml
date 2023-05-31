@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#4765FF">
+
+    <TextView
+        android:id="@+id/pet_name_intro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/pet_name_intro"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        app:fontFamily="@font/acme"
+        app:layout_constraintBaseline_toBaselineOf="@+id/pet_name_edit"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/pet_name_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/pet_name_edit"
+        android:textSize = "20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pet_name_intro"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="16dp"
+        app:layout_constraintHorizontal_bias="0.06"
+        android:textColor="#FFFFFF"/>
+
+    <ImageButton
+        android:id="@+id/petChoiceOne"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:src="@drawable/cat_pet"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9"
+        android:scaleType="centerCrop"/>
+
+    <ImageButton
+        android:id="@+id/petChoiceTwo"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:src="@drawable/lizard_pet"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9"
+        android:scaleType="centerCrop"/>
+
+    <ImageButton
+        android:id="@+id/petChoiceThree"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:src="@drawable/pikachu_pet"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9"
+        app:layout_constraintHorizontal_bias="0.9"
+        android:scaleType="centerCrop"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
