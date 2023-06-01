@@ -1,7 +1,6 @@
 package com.example.tamagotchitodo
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,16 +11,14 @@ import androidx.navigation.findNavController
 import com.example.tamagotchitodo.databinding.FragmentTaskBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
 class TaskFragment : Fragment() {
     private var _binding: FragmentTaskBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: StatusViewModel by activityViewModels()
     lateinit var dbRef : DatabaseReference
 
     override fun onCreateView(
@@ -35,9 +32,7 @@ class TaskFragment : Fragment() {
         binding.taskDueByDate.text = args.taskDueDateArg
         val taskKey = args.keyArg
         val petKey = args.petKeyArg
-        var tasksDone = args.tasksDoneArg
         var doneOrDeleted = false
-        Log.i("TaskFragment before click listener", "tasksDone is $tasksDone")
 
         binding.deleteButton.setOnClickListener {
             if (!doneOrDeleted) {
@@ -48,6 +43,7 @@ class TaskFragment : Fragment() {
                         dbRef.child("tasks").child(taskKey).removeValue()
                         Toast.makeText(requireContext(), R.string.toast_task_deleted, Toast.LENGTH_SHORT).show()
                         doneOrDeleted = true
+                        viewModel.removeTaskWithName(dbRef.child("tasks").child(taskKey).child("taskName").toString())
                     }
                     .setNegativeButton(R.string.alert_negative) { dialog, which ->
                         rootView.findNavController().navigateUp()
@@ -58,10 +54,10 @@ class TaskFragment : Fragment() {
         binding.doneButton.setOnClickListener {
             if (!doneOrDeleted) {
                 dbRef.child("tasks").child(taskKey).removeValue()
-                dbRef.child("pets").child(petKey).child("numOfTasksDone").setValue(tasksDone + 1)
+                dbRef.child("pets").child(petKey).child("numOfTasksDone").setValue(1)
                 Snackbar.make(binding.doneButton, R.string.snackbar_message, Snackbar.LENGTH_SHORT).show()
                 doneOrDeleted = true
-                Log.i("TaskFragment in click listener", "tasksDone is $tasksDone")
+                viewModel.removeTaskWithName(dbRef.child("tasks").child(taskKey).child("taskName").toString())
             }
         }
 

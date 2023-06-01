@@ -26,11 +26,9 @@ class ToDoListFragment : Fragment() {
         dbRef = Firebase.database.reference
         val args = ToDoListFragmentArgs.fromBundle(requireArguments())
         val petKey = args.petKeyArg
-        var tasksDone = args.tasksDoneArg
-        Log.i("ToDoListFragment", "tasksDone is $tasksDone")
 
         taskList = mutableListOf()
-        val myAdapter = TaskAdapter(taskList, petKey, tasksDone)
+        val myAdapter = TaskAdapter(taskList, petKey)
         binding.recyclerView.adapter = myAdapter
 
 

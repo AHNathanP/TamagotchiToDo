@@ -19,9 +19,6 @@
         <argument
             android:name="petKeyArg"
             app:argType="string" />
-        <argument
-            android:name="tasksDoneArg"
-            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
@@ -46,9 +43,6 @@
         <argument
             android:name="petKeyArg"
             app:argType="string" />
-        <argument
-            android:name="tasksDoneArg"
-            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/petFragment"

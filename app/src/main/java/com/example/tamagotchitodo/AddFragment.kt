@@ -18,7 +18,6 @@ class AddFragment : Fragment() {
     lateinit var dbRef : DatabaseReference
     private val viewModel: StatusViewModel by activityViewModels()
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {

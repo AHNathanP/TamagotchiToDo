@@ -1,16 +1,12 @@
 package com.example.tamagotchitodo
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tamagotchitodo.databinding.ListItemLayoutBinding
-import com.google.firebase.database.*
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 
-class TaskAdapter(val taskList: MutableList<Task>, val petKey: String, var tasksDone: Int): RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+class TaskAdapter(val taskList: MutableList<Task>, val petKey: String): RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
     inner class TaskViewHolder(val binding: ListItemLayoutBinding): RecyclerView.ViewHolder(binding.root) {
         private lateinit var currentTask: Task
 
@@ -23,7 +19,7 @@ class TaskAdapter(val taskList: MutableList<Task>, val petKey: String, var tasks
                 val taskKey = currentTask.key
                 val action = ToDoListFragmentDirections
                     .actionToDoListFragmentToTaskFragment(taskName, taskDueDate,
-                        taskKey, petKey, tasksDone)
+                        taskKey, petKey)
                 binding.root.findNavController().navigate(action)
             }
         }

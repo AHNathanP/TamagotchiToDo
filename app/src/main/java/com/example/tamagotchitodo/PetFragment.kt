@@ -28,7 +28,6 @@ class PetFragment : Fragment() {
         val rootView = binding.root
         dbRef = Firebase.database.reference
         var key = ""
-        var tasksDone = 0
 
         val calendar: Calendar = Calendar.getInstance()
         val simpleDateFormat = SimpleDateFormat("EEE, LLLL dd, KK:mm aaa")
@@ -36,15 +35,14 @@ class PetFragment : Fragment() {
         binding.dateTimeTwo.text = dateTime
 
         binding.toDoListFragment.setOnClickListener {
-            Log.i("PetFragment inside button click listener", "tasksDone is $tasksDone")
-            val action = PetFragmentDirections.actionPetFragmentToToDoListFragment(key, tasksDone)
+            val action = PetFragmentDirections.actionPetFragmentToToDoListFragment(key)
             rootView.findNavController().navigate(action)
         }
         binding.petImage.setOnClickListener {
             val action = PetFragmentDirections.actionPetFragmentToChoosePetFragment()
             rootView.findNavController().navigate(action)
         }
-        viewModel.updateWeekYear(SimpleDateFormat("w").format(calendar.time).toInt())
+        viewModel.updateWeekday(SimpleDateFormat("EEEE").format(calendar.time).toString(), key)
 
         dbRef.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -59,9 +57,8 @@ class PetFragment : Fragment() {
                             val petName = singlePetEntry.child("nameOfPet").getValue().toString()
                             val petStatus = singlePetEntry.child("status").getValue().toString()
                             val petImageId = Integer.parseInt(singlePetEntry.child("imageId").getValue().toString())
-                            tasksDone = Integer.parseInt(singlePetEntry.child("numOfTasksDone").getValue().toString())
+                            val tasksDone = Integer.parseInt(singlePetEntry.child("numOfTasksDone").getValue().toString())
                             key = singlePetEntry.key.toString()
-                            Log.i("PetFragment inside value event listener", "tasksDone is $tasksDone")
 
                             setStatus(petName, key, petStatus, tasksDone)
                             setImage(petImageId)
@@ -78,24 +75,23 @@ class PetFragment : Fragment() {
         return rootView
     }
     fun setStatus(name: String, key: String, status: String, tasksDone: Int) {
-//        val tasks = viewModel.numOfTasksDone.value?:0
         var checkAllDates = true
 
         for (task in viewModel.listOfTasks.value?: mutableListOf()) {
             val month = task.monthDue
             val day = task.dayDue
-            if(!(viewModel.checkTime(month, day)) && checkAllDates) {
+            if(!(checkTime(month, day)) && checkAllDates) {
                 binding.petStatusName.text = "$name is:"
                 dbRef.child("pets").child(key).child("status").setValue("super sad!")
                 checkAllDates = false
             }
         }
         if (checkAllDates && name != "") {
-            if (tasksDone < 3) {
+            if (tasksDone < 1) {
                 binding.petStatusName.text = "$name is:"
                 dbRef.child("pets").child(key).child("status").setValue("sad...")
             }
-            else if(tasksDone in 3..9){
+            else {
                 binding.petStatusName.text = "$name is:"
                 dbRef.child("pets").child(key).child("status").setValue("happy!")
             }
@@ -112,5 +108,18 @@ class PetFragment : Fragment() {
         if (imageKey == 3) {
             binding.petImage.setImageResource(R.drawable.pikachu_pet)
         }
+    }
+    fun checkTime(monthOfDueDate: Int, dayOfDueDate: Int):Boolean {
+        val calendar = Calendar.getInstance()
+        val month : Int = SimpleDateFormat("L").format(calendar.time).toInt()
+        val day : Int = SimpleDateFormat("d").format(calendar.time).toInt()
+
+        if (monthOfDueDate < month) {
+            return false
+        }
+        if (monthOfDueDate == month && dayOfDueDate < day) {
+            return false
+        }
+        return true
     }
 }
