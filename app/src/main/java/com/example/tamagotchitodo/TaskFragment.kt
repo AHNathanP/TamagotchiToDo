@@ -57,7 +57,7 @@ class TaskFragment : Fragment() {
                 dbRef.child("pets").child(petKey).child("numOfTasksDone").setValue(1)
                 Snackbar.make(binding.doneButton, R.string.snackbar_message, Snackbar.LENGTH_SHORT).show()
                 doneOrDeleted = true
-                viewModel.removeTaskWithName(dbRef.child("tasks").child(taskKey).child("taskName").toString())
+                viewModel.removeTaskWithKey(taskKey)
             }
         }
 

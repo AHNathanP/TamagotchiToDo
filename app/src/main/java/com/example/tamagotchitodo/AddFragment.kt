@@ -39,7 +39,8 @@ class AddFragment : Fragment() {
                 val task = Task(taskName, dueDateMonth, dueDateDay)
                 dbRef.child("tasks").push().setValue(task)
                 Toast.makeText(requireContext(), R.string.toast_task_added, Toast.LENGTH_SHORT).show()
-                viewModel.listOfTasks.value?.add(task)
+//                viewModel.listOfTasks.value?.add(task)
+                viewModel.listOfTaskKeys.add(task.key)
             }
         }
         return rootView
