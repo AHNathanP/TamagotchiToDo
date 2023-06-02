@@ -43,7 +43,7 @@ class TaskFragment : Fragment() {
                         dbRef.child("tasks").child(taskKey).removeValue()
                         Toast.makeText(requireContext(), R.string.toast_task_deleted, Toast.LENGTH_SHORT).show()
                         doneOrDeleted = true
-                        viewModel.removeTaskWithName(dbRef.child("tasks").child(taskKey).child("taskName").toString())
+                        viewModel.removeTask(taskKey)
                     }
                     .setNegativeButton(R.string.alert_negative) { dialog, which ->
                         rootView.findNavController().navigateUp()
@@ -57,7 +57,7 @@ class TaskFragment : Fragment() {
                 dbRef.child("pets").child(petKey).child("numOfTasksDone").setValue(1)
                 Snackbar.make(binding.doneButton, R.string.snackbar_message, Snackbar.LENGTH_SHORT).show()
                 doneOrDeleted = true
-                viewModel.removeTaskWithKey(taskKey)
+                viewModel.removeTask(taskKey)
             }
         }
 

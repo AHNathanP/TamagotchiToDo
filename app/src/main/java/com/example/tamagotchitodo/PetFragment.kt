@@ -77,10 +77,10 @@ class PetFragment : Fragment() {
     fun setStatus(name: String, key: String, status: String, tasksDone: Int) {
         var checkAllDates = true
 
-        for (task in viewModel.listOfTasks.value?: mutableListOf()) {
-            val month = task.monthDue
-            val day = task.dayDue
-            if(!(checkTime(month, day)) && checkAllDates) {
+        for (taskKey in viewModel.listOfTasks) {
+            val month = taskKey.monthDue
+            val day = taskKey.dayDue
+            if (!checkTime(month, day) && checkAllDates) {
                 binding.petStatusName.text = "$name is:"
                 dbRef.child("pets").child(key).child("status").setValue("super sad!")
                 checkAllDates = false
