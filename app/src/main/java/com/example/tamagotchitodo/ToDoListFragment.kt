@@ -13,11 +13,9 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.database.*
 
-
 class ToDoListFragment : Fragment() {
     private var _binding: FragmentToDoListBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: StatusViewModel by activityViewModels()
     lateinit var dbRef : DatabaseReference
     lateinit var taskList: MutableList<Task>
 
@@ -32,7 +30,6 @@ class ToDoListFragment : Fragment() {
         taskList = mutableListOf()
         val myAdapter = TaskAdapter(taskList, petKey)
         binding.recyclerView.adapter = myAdapter
-        viewModel.listOfTasks = taskList
 
 
         binding.addButton.setOnClickListener {

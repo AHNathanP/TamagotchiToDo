@@ -55,12 +55,11 @@ class PetFragment : Fragment() {
                         if (singlePetEntry.child("nameOfPet").getValue() != null) {
                             numOfPetsAdded++
                             val petName = singlePetEntry.child("nameOfPet").getValue().toString()
-                            val petStatus = singlePetEntry.child("status").getValue().toString()
                             val petImageId = Integer.parseInt(singlePetEntry.child("imageId").getValue().toString())
                             val tasksDone = Integer.parseInt(singlePetEntry.child("numOfTasksDone").getValue().toString())
                             key = singlePetEntry.key.toString()
 
-                            setStatus(petName, key, petStatus, tasksDone)
+                            setStatus(petName, key, tasksDone)
                             setImage(petImageId)
                         }
                     }
@@ -74,29 +73,21 @@ class PetFragment : Fragment() {
 
         return rootView
     }
-    fun setStatus(name: String, key: String, status: String, tasksDone: Int) {
-        var checkAllDates = true
-
-        for (taskKey in viewModel.listOfTasks) {
-            val month = taskKey.monthDue
-            val day = taskKey.dayDue
-            if (!checkTime(month, day) && checkAllDates) {
-                binding.petStatusName.text = "$name is:"
-                dbRef.child("pets").child(key).child("status").setValue("super sad!")
-                checkAllDates = false
-            }
-        }
-        if (checkAllDates && name != "") {
+    fun setStatus(name: String, key: String, tasksDone: Int) {
+        var petStatus = ""
+        if (name != "") {
             if (tasksDone < 1) {
                 binding.petStatusName.text = "$name is:"
                 dbRef.child("pets").child(key).child("status").setValue("sad...")
+                petStatus = "sad..."
             }
             else {
                 binding.petStatusName.text = "$name is:"
                 dbRef.child("pets").child(key).child("status").setValue("happy!")
+                petStatus = "happy!"
             }
         }
-        binding.petStatusFeeling.text = status
+        binding.petStatusFeeling.text = petStatus
     }
     fun setImage(imageKey: Int) {
         if (imageKey == 1) {
@@ -108,18 +99,5 @@ class PetFragment : Fragment() {
         if (imageKey == 3) {
             binding.petImage.setImageResource(R.drawable.pikachu_pet)
         }
-    }
-    fun checkTime(monthOfDueDate: Int, dayOfDueDate: Int):Boolean {
-        val calendar = Calendar.getInstance()
-        val month : Int = SimpleDateFormat("L").format(calendar.time).toInt()
-        val day : Int = SimpleDateFormat("d").format(calendar.time).toInt()
-
-        if (monthOfDueDate < month) {
-            return false
-        }
-        if (monthOfDueDate == month && dayOfDueDate < day) {
-            return false
-        }
-        return true
     }
 }

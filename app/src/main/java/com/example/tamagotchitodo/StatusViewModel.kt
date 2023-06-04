@@ -7,7 +7,6 @@ import com.google.firebase.ktx.Firebase
 
 class StatusViewModel: ViewModel() {
     var weekday = "Sunday"
-    var listOfTasks = mutableListOf<Task>()
     lateinit var dbRef : DatabaseReference
 
     fun updateWeekday(newWeekday: String, petKey: String) {
@@ -15,13 +14,6 @@ class StatusViewModel: ViewModel() {
         if (newWeekday == weekday && petKey != "") {
             weekday = newWeekday
             dbRef.child("pets").child(petKey).child("numOfTasksDone").setValue(0)
-        }
-    }
-    fun removeTask(taskKey: String) {
-        for (task in listOfTasks) {
-            if (task.key == taskKey) {
-                listOfTasks.remove(task)
-            }
         }
     }
 }

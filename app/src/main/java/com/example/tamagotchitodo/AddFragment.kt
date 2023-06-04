@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import com.example.tamagotchitodo.databinding.FragmentAddBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
